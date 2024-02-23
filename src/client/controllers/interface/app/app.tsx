@@ -5,7 +5,7 @@ const playerGui = new Instance("ScreenGui", game.GetService("Players").LocalPlay
 
 const root = createRoot(new Instance("Folder"));
 
-function Counter() {
+function App() {
 	const [count, setCount] = useState(0);
 
 	return (
@@ -21,4 +21,4 @@ function Counter() {
 	);
 }
 
-root.render(<StrictMode>{createPortal(<Counter />, playerGui)}</StrictMode>);
+root.render(<StrictMode>{createPortal(<App />, playerGui)}</StrictMode>);
