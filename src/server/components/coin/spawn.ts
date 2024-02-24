@@ -4,13 +4,21 @@ import { OnGameStarted } from "server/services/scheduler";
 import { ReplicatedStorage } from "@rbxts/services";
 
 @Component({tag: "coin-spawn"})
-export class CoinSpawn extends BaseComponent implements OnGameStarted {
+export class CoinSpawn extends BaseComponent implements OnGameStarted, OnStart {
     constructor() {
         super();
     }
 
+    onStart(): void {
+        assert (this.instance.IsA("BasePart"), "CoinSpawn component must be attached to a BasePart");
+        
+        this.instance.Anchored = true;
+        this.instance.CanCollide = false;
+        this.instance.Transparency = 1;
+    }
+
     onGameStarted(): void {
-        if (!this.instance.IsA("BasePart")) return;
+        assert (this.instance.IsA("BasePart"), "CoinSpawn component must be attached to a BasePart");
 
         let coin: Model = ReplicatedStorage.FindFirstChild("assets")!.WaitForChild("coin").Clone() as Model;
         coin.Parent = game.Workspace;

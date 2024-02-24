@@ -8,6 +8,14 @@ export interface OnPlayerJoined {
     onPlayerJoined(player: Player): void;
 }
 
+export interface OnGameStarted {
+    onGameStarted(): void;
+}
+
+export interface OnLavaRising {
+    onLavaRising(): void;
+}
+
 @Service()
 export class PlayerJoinService extends BaseComponent implements OnStart {
     onStart() {
@@ -30,10 +38,6 @@ export class PlayerJoinService extends BaseComponent implements OnStart {
     }
 }
 
-export interface OnGameStarted {
-    onGameStarted(): void;
-}
-
 @Service()
 export class GameStartService extends BaseComponent implements OnStart {
     constructor() {
@@ -49,6 +53,26 @@ export class GameStartService extends BaseComponent implements OnStart {
         GameSession.onGameStart.Connect(() => {
             for (const listener of listeners) {
                 task.spawn(() => listener.onGameStarted());
+            }
+        });
+    }
+}
+
+@Service()
+export class LavaRisingService extends BaseComponent implements OnStart {
+    constructor() {
+        super();
+    }
+
+    onStart() {
+        const listeners = new Set<OnLavaRising>();
+
+        Modding.onListenerAdded<OnLavaRising>((object) => listeners.add(object));
+        Modding.onListenerRemoved<OnLavaRising>((object) => listeners.delete(object));
+
+        GameSession.onGameStart.Connect(() => {
+            for (const listener of listeners) {
+                task.spawn(() => listener.onLavaRising());
             }
         });
     }

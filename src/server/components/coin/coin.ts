@@ -8,9 +8,8 @@ export class Coin extends BaseComponent implements OnStart {
     }
 
     onStart(): void {
-        assert(this.instance.IsA("Model"), "Coin component must be attached to a BasePart");
+        assert(this.instance.IsA("Model"), "Coin component must be attached to a Model");
 
-        // on touch
         (this.instance.FindFirstChild("body") as BasePart)!.Touched.Connect((hit) => {
             if (hit.Parent!.FindFirstChild("Humanoid")) {
                 this.instance.Destroy();
