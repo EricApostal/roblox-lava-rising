@@ -1,11 +1,24 @@
 const camera = game.GetService("Workspace").WaitForChild("Camera") as Camera;
 const player = game.GetService("Players").LocalPlayer;
 
+const TweenService = game.GetService("TweenService")
+
+const updateThreshhold = 1;
+
 function initCameraTick() {
 	const rootPart = player.Character!.WaitForChild("HumanoidRootPart") as BasePart;
-	game.GetService("RunService").RenderStepped.Connect(function (dt: number) {
-		camera.CFrame = new CFrame(rootPart.Position.add(new Vector3(0, 5, 40))).mul(CFrame.Angles(-0.05, 0, 0));
-	});
+	// game.GetService("RunService").RenderStepped.Connect(function (dt: number) {
+
+	// });
+	task.spawn(function(){
+		while (true) {
+			let newCFrame = new CFrame(rootPart.Position.add(new Vector3(0, 5, 40))).mul(CFrame.Angles(-0.05, 0, 0));
+			let goal = {"CFrame": newCFrame}
+			const tween = TweenService.Create(camera, new TweenInfo(updateThreshhold), goal);
+			tween.Play();
+			wait(0.1);
+		}
+	})
 }
 
 player.CharacterAdded.Connect(function () {
