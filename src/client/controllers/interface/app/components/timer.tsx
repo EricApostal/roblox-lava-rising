@@ -6,12 +6,12 @@ const root = createRoot(new Instance("Folder"));
 let timeSetter: Callback
 
 export function Timer() {
-	const [time, setTime] = useState(0);
+	const [time, setTime] = useState(120);
 	timeSetter = setTime;
 	React.useEffect(() => {
 		task.spawn(function() {
 			wait(1)
-			setTime(time + 1)});
+			setTime(time - 1)});
 	  }, [time]);
 	return (
 		<frame
