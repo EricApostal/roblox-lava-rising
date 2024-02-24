@@ -2,19 +2,17 @@ import React, { StrictMode, useState } from "@rbxts/react";
 import { createPortal, createRoot } from "@rbxts/react-roblox";
 
 const playerGui = new Instance("ScreenGui", game.GetService("Players").LocalPlayer.WaitForChild("PlayerGui"));
-
 const root = createRoot(new Instance("Folder"));
+let timeSetter: Callback
 
 export function Timer() {
 	const [time, setTime] = useState(0);
-
-	task.spawn(function () {
-		while (true) {
+	timeSetter = setTime;
+	React.useEffect(() => {
+		task.spawn(function() {
 			wait(1)
-			setTime(time + 1);
-		}
-	});
-
+			setTime(time + 1)});
+	  }, [time]);
 	return (
 		<frame
 			Size={new UDim2(0, 200, 0, 75)}
