@@ -1,6 +1,8 @@
 import React, { StrictMode, useState } from "@rbxts/react";
 import { createPortal, createRoot } from "@rbxts/react-roblox";
 import { Timer } from "./components/timer";
+import { ReflexProvider } from "@rbxts/react-reflex";
+import { timerProducer } from "./state";
 
 const playerGui = new Instance("ScreenGui", game.GetService("Players").LocalPlayer.WaitForChild("PlayerGui"));
 
@@ -11,5 +13,10 @@ function App() {
 }
 
 export function RenderTimer() {
-	root.render(<StrictMode>{createPortal(<App />, playerGui)}</StrictMode>);
+	root.render(
+		<StrictMode>
+			<ReflexProvider producer={timerProducer}>
+				{createPortal(<App />, playerGui)}
+			</ReflexProvider>
+		</StrictMode>);
 }

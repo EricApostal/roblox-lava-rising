@@ -1,17 +1,23 @@
 import React, { StrictMode, useState } from "@rbxts/react";
 import { createPortal, createRoot } from "@rbxts/react-roblox";
 
+import { useProducer } from "@rbxts/react-reflex";
+import { RootProducer, useRootProducer, useRootSelector, RootState } from "../state";
+
 const playerGui = new Instance("ScreenGui", game.GetService("Players").LocalPlayer.WaitForChild("PlayerGui"));
 const root = createRoot(new Instance("Folder"));
-let timeSetter: Callback
 
 export function Timer() {
-	const [time, setTime] = useState(120);
-	timeSetter = setTime;
+	const producer = useRootProducer();
+	const count = useRootSelector((state: RootState) => (state as RootState).count);
+
+	// const [time, setTime] = useState(120);
+
 	React.useEffect(() => {
 		task.spawn(function() {
 			wait(1)
-			setTime(time - 1)});
+			// producer.increment()
+		});
 	  }, [time]);
 	return (
 		<frame
@@ -20,12 +26,14 @@ export function Timer() {
 			AnchorPoint={new Vector2(0.5, 0)}
 			BorderSizePixel={0}
 			BackgroundColor3={new Color3(1, 1, 1)}
+			Event={{
+			}}
 			children={[
 				<uicorner CornerRadius={new UDim(0, 12)}></uicorner>,
 				<textlabel
 					Position={new UDim2(0.5, 0, 0.5, 0)}
 					AnchorPoint={new Vector2(0.5, 0)}
-					Text={`${time}`}
+					Text={`${"asd"}`}
 					FontSize={Enum.FontSize.Size18}
 				/>,
 			]}
