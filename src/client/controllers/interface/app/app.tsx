@@ -10,4 +10,6 @@ function App() {
 	return <Timer />;
 }
 
-root.render(<StrictMode>{createPortal(<App />, playerGui)}</StrictMode>);
+export function RenderTimer() {
+	root.render(<StrictMode>{createPortal(<App />, playerGui)}</StrictMode>);
+}
