@@ -13,6 +13,7 @@ function App() {
 }
 
 export function RenderTimer() {
+	print("Rendering timer");
 	root.render(
 		<StrictMode>
 			<ReflexProvider producer={timerProducer}>
