@@ -19,16 +19,30 @@ export class PlatformController extends BaseComponent implements OnStart {
         let character = game.GetService("Players").LocalPlayer.Character! as Model || game.GetService("Players").LocalPlayer.CharacterAdded.Wait()[0];
         let lastPosition = this.instance.Position;
 
-        RunService.RenderStepped.Connect(() => {
-            if (!this.isOnPlatform(character)) return;
+        let firstPlatformStep = true;
+        RunService.Heartbeat.Connect(() => {
+            let torso = character.FindFirstChild("LowerTorso") as BasePart;
+
+            if (!this.isOnPlatform(character)) {
+                firstPlatformStep = true;
+                return;
+            }
 
             let currentPosition = (this.instance as BasePart).Position;
             let delta = currentPosition.sub(lastPosition);
 
-            if (character && character.PrimaryPart) {
-                character.PrimaryPart.CFrame = character.PrimaryPart.CFrame.add(delta);
+            if (character && torso) {
+                if (firstPlatformStep) {
+                    let newCFrame = torso.CFrame.add(delta.mul(.1));
+                    torso.CFrame = newCFrame;
+                    firstPlatformStep = false;
+                } else {
+                    let newCFrame = torso.CFrame.add(delta);
+                    torso.CFrame = newCFrame;
+                    firstPlatformStep = false;
+                }
             }
-            
+
             lastPosition = currentPosition;
         })
     }
@@ -44,6 +58,7 @@ export class PlatformController extends BaseComponent implements OnStart {
         params.FilterDescendantsInstances = [character];
 
         let raycastResult = game.Workspace.Raycast(rayOrigin, rayDirection, params);
+        if (!raycastResult) return false;
         if (this.lastCast === raycastResult!.Instance) {
             this.castFrames++;
         } else {
@@ -52,9 +67,9 @@ export class PlatformController extends BaseComponent implements OnStart {
         }
         this.lastCast = raycastResult!.Instance;
 
-        if (this.castFrames < 10) {
-            return false;
-        }
+        // if (this.castFrames < 10) {
+        //     return false;
+        // }
 
         return raycastResult?.Instance === this.instance;
     }
