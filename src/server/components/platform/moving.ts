@@ -5,8 +5,8 @@ import { BaseComponent, Component } from "@flamework/components";
 import { OnGameStarted } from "shared/components/game/scheduler";
 import { TweenService } from "@rbxts/services";
 
-const distance = 15;
-const updateThreshhold = 3;
+const distance = 30;
+const updateThreshhold = 1;
 const timeBetweenMovements = 0;
 const tweenInfo = new TweenInfo(updateThreshhold, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut);
 

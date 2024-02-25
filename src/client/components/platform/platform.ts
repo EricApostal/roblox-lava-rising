@@ -33,8 +33,11 @@ export class PlatformController extends BaseComponent implements OnStart {
 
             if (character && torso) {
                 if (firstPlatformStep) {
-                    let newCFrame = torso.CFrame.add(delta.mul(.1));
-                    torso.CFrame = newCFrame;
+                    let newCFrame = torso.CFrame.add(delta.mul(0.1));
+                    // torso.CFrame = newCFrame;
+                    const tweenInfo = new TweenInfo(0.1);
+                    const pos = TweenService.Create(torso, tweenInfo, {"CFrame": newCFrame});
+                    pos.Play();
                     firstPlatformStep = false;
                 } else {
                     let newCFrame = torso.CFrame.add(delta);
