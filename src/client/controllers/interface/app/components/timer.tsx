@@ -18,8 +18,6 @@ export function Timer() {
 			AnchorPoint={new Vector2(0.5, 0)}
 			BorderSizePixel={0}
 			BackgroundColor3={new Color3(1, 1, 1)}
-			Event={{
-			}}
 			children={[
 				<uicorner CornerRadius={new UDim(0, 12)}></uicorner>,
 				<textlabel
