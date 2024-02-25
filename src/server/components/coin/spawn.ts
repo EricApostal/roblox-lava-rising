@@ -18,7 +18,6 @@ export class CoinSpawn extends BaseComponent implements OnGameStarted, OnStart {
     }
 
     onGameStarted(): void {
-        print("on game start call server")
         assert (this.instance.IsA("BasePart"), "CoinSpawn component must be attached to a BasePart");
 
         let coin: Model = ReplicatedStorage.FindFirstChild("assets")!.WaitForChild("coin").Clone() as Model;
