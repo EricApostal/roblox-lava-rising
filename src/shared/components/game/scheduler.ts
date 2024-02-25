@@ -145,7 +145,6 @@ export class CharacterLoadedService extends BaseComponent implements OnPlayerCha
 
     constructor() {
         super();
-    
     }
 
     onStart(): void {
