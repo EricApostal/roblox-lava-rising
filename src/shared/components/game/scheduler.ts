@@ -21,6 +21,10 @@ export interface OnLavaRising {
     onLavaRising(): void;
 }
 
+export interface OnPlayerCharacterLoaded {
+    onPlayerCharacterLoaded(player: Player, character: Model): void;
+}
+
 
 @Service()
 @Controller()
@@ -105,5 +109,47 @@ export class LavaRisingService extends BaseComponent implements OnStart {
                 task.spawn(() => listener.onLavaRising());
             }
         });
+    }
+}
+
+@Service()
+@Controller()
+export class PlayerCharacterLoadService extends BaseComponent implements OnPlayerJoined {
+    onPlayerJoined(player: Player): void {
+        const listeners = new Set<OnPlayerCharacterLoaded>();
+
+        Modding.onListenerAdded<OnPlayerCharacterLoaded>((object) => listeners.add(object));
+        Modding.onListenerRemoved<OnPlayerCharacterLoaded>((object) => listeners.delete(object));
+
+        player.CharacterAdded.Connect((character) => {
+            for (const listener of listeners) {
+                task.spawn(() => listener.onPlayerCharacterLoaded(player, character));
+            }
+        });
+    }
+}
+
+/*
+LOCAL ONLY! 
+Why is it in replicated storage? I felt like it.
+*/
+
+export interface OnLocalCharacterLoaded {
+    onLocalCharacterLoaded(character: Model): void;
+}
+
+@Controller()
+export class CharacterLoadedService extends BaseComponent implements OnStart {
+    onStart() {
+        const listeners = new Set<OnLocalCharacterLoaded>();
+
+        Modding.onListenerAdded<OnLocalCharacterLoaded>((object) => listeners.add(object));
+        Modding.onListenerRemoved<OnLocalCharacterLoaded>((object) => listeners.delete(object));
+
+        Players.LocalPlayer.CharacterAdded.Connect(() => {
+            for (const listener of listeners) {
+                task.spawn(() => listener.onLocalCharacterLoaded(Players.LocalPlayer.Character as Model));
+            }
+        })
     }
 }
