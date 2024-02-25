@@ -25,6 +25,10 @@ export interface OnPlayerCharacterLoaded {
     onPlayerCharacterLoaded(player: Player, character: Model): void;
 }
 
+export interface OnLocalCharacterLoaded {
+    onLocalCharacterLoaded(character: Model): void;
+}
+
 
 @Service()
 @Controller()
@@ -134,22 +138,27 @@ LOCAL ONLY!
 Why is it in replicated storage? I felt like it.
 */
 
-export interface OnLocalCharacterLoaded {
-    onLocalCharacterLoaded(character: Model): void;
-}
-
+@Service()
 @Controller()
-export class CharacterLoadedService extends BaseComponent implements OnStart {
-    onStart() {
-        const listeners = new Set<OnLocalCharacterLoaded>();
+export class CharacterLoadedService extends BaseComponent implements OnPlayerCharacterLoaded, OnStart {
+    listeners = new Set<OnLocalCharacterLoaded>();
 
-        Modding.onListenerAdded<OnLocalCharacterLoaded>((object) => listeners.add(object));
-        Modding.onListenerRemoved<OnLocalCharacterLoaded>((object) => listeners.delete(object));
+    constructor() {
+        super();
+    
+    }
 
-        Players.LocalPlayer.CharacterAdded.Connect(() => {
-            for (const listener of listeners) {
-                task.spawn(() => listener.onLocalCharacterLoaded(Players.LocalPlayer.Character as Model));
+    onStart(): void {
+        Modding.onListenerAdded<OnLocalCharacterLoaded>((object) => this.listeners.add(object));
+        Modding.onListenerRemoved<OnLocalCharacterLoaded>((object) => this.listeners.delete(object));
+    }
+
+    onPlayerCharacterLoaded(player: Player, character: Model): void {
+        if (player === Players.LocalPlayer) {
+            print("Local character loaded from scheduler!");
+            for (const listener of this.listeners) {
+                task.spawn(() => listener.onLocalCharacterLoaded(character));
             }
-        })
+        }
     }
 }

@@ -1,17 +1,16 @@
 import { BaseComponent } from "@flamework/components";
 import { Controller } from "@flamework/core";
 import { TweenService } from "@rbxts/services";
-import { OnPlayerCharacterLoaded } from "shared/components/game/scheduler";
+import { OnLocalCharacterLoaded, OnPlayerCharacterLoaded } from "shared/components/game/scheduler";
 
 @Controller()
-export class CameraController extends BaseComponent implements OnPlayerCharacterLoaded {
+export class CameraController extends BaseComponent implements OnLocalCharacterLoaded {
 
     constructor() {
         super();
     }
-
-	onPlayerCharacterLoaded(player: Player, character: Model) {
-        print("Player character loaded")
-	}
-
+    
+    onLocalCharacterLoaded(character: Model): void {
+        // print("okay so local works here")
+    }
 }

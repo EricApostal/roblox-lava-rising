@@ -5,9 +5,9 @@ import { BaseComponent, Component } from "@flamework/components";
 import { OnGameStarted } from "shared/components/game/scheduler";
 import { TweenService } from "@rbxts/services";
 
-const distance = 10;
+const distance = 15;
 const updateThreshhold = 3;
-const timeBetweenMovements = 3;
+const timeBetweenMovements = 0;
 const tweenInfo = new TweenInfo(updateThreshhold, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut);
 
 @Component({tag:"moving-platform"})
@@ -24,10 +24,10 @@ export class MovingPlatform extends BaseComponent implements OnStart, OnGameStar
         while (true) {
             const tween = TweenService.Create(platform, tweenInfo, endPosition);
 			tween.Play();
-            wait(updateThreshhold + timeBetweenMovements);
+            wait(updateThreshhold + timeBetweenMovements + 0.1);
             const tweenBack = TweenService.Create(platform, tweenInfo, {"Position": startPosition});
             tweenBack.Play();
-            wait(updateThreshhold + timeBetweenMovements);
+            wait(updateThreshhold + timeBetweenMovements + 0.1);
         }
     }
 }

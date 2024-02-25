@@ -18,6 +18,5 @@ export class Coin extends BaseComponent implements OnStart, OnGameStarted {
     }
 
     onGameStarted(): void {
-        
     }
 }
