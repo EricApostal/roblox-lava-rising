@@ -18,6 +18,6 @@ export class Coin extends BaseComponent implements OnStart, OnGameStarted {
     }
 
     onGameStarted(): void {
-        print("Game started (scheduler works :D)");
+        
     }
 }

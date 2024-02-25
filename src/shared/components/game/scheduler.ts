@@ -1,4 +1,4 @@
-import { OnStart, Service } from "@flamework/core";
+import { Controller, OnStart, Service } from "@flamework/core";
 import { Players } from "@rbxts/services";
 import { Modding } from "@flamework/core";
 import { BaseComponent } from "@flamework/components";
@@ -17,6 +17,7 @@ export interface OnLavaRising {
 }
 
 @Service()
+@Controller()
 export class PlayerJoinService extends BaseComponent implements OnStart {
     onStart() {
         const listeners = new Set<OnPlayerJoined>();
@@ -39,6 +40,7 @@ export class PlayerJoinService extends BaseComponent implements OnStart {
 }
 
 @Service()
+@Controller()
 export class GameStartService extends BaseComponent implements OnStart {
     constructor() {
         super();
@@ -59,6 +61,7 @@ export class GameStartService extends BaseComponent implements OnStart {
 }
 
 @Service()
+@Controller()
 export class LavaRisingService extends BaseComponent implements OnStart {
     constructor() {
         super();
