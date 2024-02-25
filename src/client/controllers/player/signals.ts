@@ -4,7 +4,7 @@ import { Modding } from "@flamework/core";
 import { BaseComponent } from "@flamework/components";
 
 export interface OnCharacterLoaded {
-    onCharacterLoaded(): void;
+    onCharacterLoaded(character: Model): void;
 }
 
 @Controller()
@@ -16,9 +16,8 @@ export class CharacterLoadedService extends BaseComponent implements OnStart {
         Modding.onListenerRemoved<OnCharacterLoaded>((object) => listeners.delete(object));
 
         Players.LocalPlayer.CharacterAdded.Connect(() => {
-            print(`Character: ${Players.LocalPlayer.Character}`)
             for (const listener of listeners) {
-                task.spawn(() => listener.onCharacterLoaded());
+                task.spawn(() => listener.onCharacterLoaded(Players.LocalPlayer.Character as Model));
             }
         })
     }
