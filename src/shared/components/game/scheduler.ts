@@ -2,7 +2,7 @@ import { OnStart, Service } from "@flamework/core";
 import { Players } from "@rbxts/services";
 import { Modding } from "@flamework/core";
 import { BaseComponent } from "@flamework/components";
-import { GameSession } from "server/game/state";
+import { GameSession } from "./state";
 
 export interface OnPlayerJoined {
     onPlayerJoined(player: Player): void;

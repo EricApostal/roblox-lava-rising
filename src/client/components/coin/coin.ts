@@ -1,8 +1,9 @@
 import { BaseComponent, Component } from "@flamework/components";
 import { OnStart } from "@flamework/core";
+import { OnGameStarted } from "shared/components/game/scheduler";
 
 @Component({tag: "coin"})
-export class Coin extends BaseComponent implements OnStart {
+export class Coin extends BaseComponent implements OnStart, OnGameStarted {
     constructor() {
         super();
     }
@@ -14,5 +15,9 @@ export class Coin extends BaseComponent implements OnStart {
 	        this.instance.PivotTo(this.instance.PrimaryPart!.CFrame.mul(CFrame.fromEulerAnglesXYZ(0, .1, 0)));
 	        wait();
         }
+    }
+
+    onGameStarted(): void {
+        print("Game started (scheduler works :D)");
     }
 }

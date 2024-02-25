@@ -1,6 +1,6 @@
 import Signal from "@rbxts/signal";
 import { Events } from "server/network";
-import { GameSession } from "./state";
+import { GameSession } from "shared/components/game/state";
 
 // On server start
 export function init() {
