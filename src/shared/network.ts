@@ -5,8 +5,7 @@ interface ClientToServerEvents {
 }
 
 interface ServerToClientEvents {
-    event(param1: string): void;
-    startGame(): void;
+    startGame(roundTime: number): void;
     endGame(): void;
 }
 

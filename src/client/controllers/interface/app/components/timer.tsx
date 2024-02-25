@@ -9,8 +9,9 @@ const root = createRoot(new Instance("Folder"));
 export function Timer() {
 	const producer = useRootProducer();
 	const count = useRootSelector((state: RootState) => (state as RootState).count);
+	const visible = useRootSelector((state: RootState) => (state as RootState).visible);
 
-	return (
+	return visible ? (
 		<frame
 			Size={new UDim2(0, 200, 0, 75)}
 			Position={new UDim2(0.5, 0, 0, 0)}
@@ -29,5 +30,5 @@ export function Timer() {
 				/>,
 			]}
 		></frame>
-	);
+	): <frame/>;
 }

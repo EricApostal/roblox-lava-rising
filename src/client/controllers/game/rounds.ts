@@ -1,11 +1,18 @@
 import { BaseComponent } from "@flamework/components";
 import { UIService } from "../interface/handler";
-import { OnGameStarted } from "shared/components/game/scheduler";
+import { OnGameEnded, OnGameStarted } from "shared/components/game/scheduler";
 import { Controller } from "@flamework/core";
+import { Config } from "shared/components/game/config";
 
 @Controller()
-export class RoundService extends BaseComponent implements OnGameStarted {
+export class RoundService extends BaseComponent implements OnGameStarted, OnGameEnded {
     onGameStarted(): void {
-        UIService.spawnTimer();
+        UIService.spawnTimer(Config.gameLength);
     }
+
+    onGameEnded(): void {
+        UIService.hideTimer();
+        print("Game ended!")
+    }
+
 }

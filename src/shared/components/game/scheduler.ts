@@ -3,18 +3,24 @@ import { Players } from "@rbxts/services";
 import { Modding } from "@flamework/core";
 import { BaseComponent } from "@flamework/components";
 import { GameSession } from "./state";
+import { Config } from "./config";
 
 export interface OnPlayerJoined {
     onPlayerJoined(player: Player): void;
 }
 
 export interface OnGameStarted {
-    onGameStarted(): void;
+    onGameStarted(gameLength: number): void;
+}
+
+export interface OnGameEnded {
+    onGameEnded(): void;
 }
 
 export interface OnLavaRising {
     onLavaRising(): void;
 }
+
 
 @Service()
 @Controller()
@@ -54,7 +60,28 @@ export class GameStartService extends BaseComponent implements OnStart {
 
         GameSession.onGameStart.Connect(() => {
             for (const listener of listeners) {
-                task.spawn(() => listener.onGameStarted());
+                task.spawn(() => listener.onGameStarted(Config.gameLength));
+            }
+        });
+    }
+}
+
+@Service()
+@Controller()
+export class GameEndService extends BaseComponent implements OnStart {
+    constructor() {
+        super();
+    }
+
+    onStart() {
+        const listeners = new Set<OnGameEnded>();
+
+        Modding.onListenerAdded<OnGameEnded>((object) => listeners.add(object));
+        Modding.onListenerRemoved<OnGameEnded>((object) => listeners.delete(object));
+
+        GameSession.onGameEnd.Connect(() => {
+            for (const listener of listeners) {
+                task.spawn(() => listener.onGameEnded());
             }
         });
     }

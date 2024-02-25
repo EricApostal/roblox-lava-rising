@@ -1,4 +1,5 @@
 import Signal from "@rbxts/signal";
+import { Config } from "shared/components/game/config";
 import { Events } from "server/network";
 import { GameSession } from "shared/components/game/state";
 
@@ -12,7 +13,7 @@ export function init() {
 // On game start
 export function start() {
     GameSession.startGame();
-    Events.startGame.broadcast();
+    Events.startGame.broadcast(Config.gameLength);
 }
 
 // On game end
