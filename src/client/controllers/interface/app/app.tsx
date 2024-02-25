@@ -2,7 +2,7 @@ import React, { StrictMode, useState } from "@rbxts/react";
 import { createPortal, createRoot } from "@rbxts/react-roblox";
 import { Timer } from "./components/timer";
 import { ReflexProvider } from "@rbxts/react-reflex";
-import { timerProducer } from "./state";
+import { timerProducer } from "./stores/timer";
 
 const playerGui = new Instance("ScreenGui", game.GetService("Players").LocalPlayer.WaitForChild("PlayerGui"));
 

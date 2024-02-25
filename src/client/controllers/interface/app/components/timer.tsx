@@ -1,23 +1,20 @@
 import React from "@rbxts/react";
-// import { createRoot } from "@rbxts/react-roblox";
+import { createRoot } from "@rbxts/react-roblox";
 
-// import { useRootProducer, useRootSelector, RootState } from "../state";
+import { useRootProducer, useRootSelector, RootState } from "../stores/timer";
 
-// const playerGui = new Instance("ScreenGui", game.GetService("Players").LocalPlayer.WaitForChild("PlayerGui"));
-// const root = createRoot(new Instance("Folder"));
+const playerGui = new Instance("ScreenGui", game.GetService("Players").LocalPlayer.WaitForChild("PlayerGui"));
+const root = createRoot(new Instance("Folder"));
 
 export function Timer() {
-	// const producer = useRootProducer();
-	// const count = useRootSelector((state: RootState) => (state as RootState).count);
+	const producer = useRootProducer();
+	const count = useRootSelector((state: RootState) => (state as RootState).count);
 
-	// const [time, setTime] = useState(120);
+	task.spawn(function() {
+		wait(1)
+		producer.increment()
+	});
 
-	// React.useEffect(() => {
-	// 	task.spawn(function() {
-	// 		wait(1)
-	// 		// producer.increment()
-	// 	});
-	//   }, [time]);
 	return (
 		<frame
 			Size={new UDim2(0, 200, 0, 75)}
@@ -32,7 +29,7 @@ export function Timer() {
 				<textlabel
 					Position={new UDim2(0.5, 0, 0.5, 0)}
 					AnchorPoint={new Vector2(0.5, 0)}
-					Text={"asd"}
+					Text={`${count}`}
 					FontSize={Enum.FontSize.Size18}
 				/>,
 			]}
