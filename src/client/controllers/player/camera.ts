@@ -26,9 +26,8 @@ function initCameraTick() {
 @Controller()
 export class CameraController extends BaseComponent implements OnLocalCharacterLoaded {
 	onLocalCharacterLoaded(character: Model) {
-
-		// camera!.CameraType = Enum.CameraType.Scriptable;
-		// camera!.FieldOfView = 40;
-		// initCameraTick();
+		camera!.CameraType = Enum.CameraType.Scriptable;
+		camera!.FieldOfView = 40;
+		initCameraTick();
 	}
 }
