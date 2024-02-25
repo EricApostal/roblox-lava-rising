@@ -10,8 +10,7 @@ function App() {
 	return <Timer />;
 }
 
-export function renderTimer() {
-	print("Rendering timer");
+export function renderApp() {
 	// Don't forget to manually make it visible!
 	const playerGui = new Instance("ScreenGui", game.GetService("Players").LocalPlayer.WaitForChild("PlayerGui"));
 	root.render(

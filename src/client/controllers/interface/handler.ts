@@ -1,4 +1,4 @@
-import { renderTimer } from "./app/app";
+import { renderApp } from "./app/app";
 import { timerProducer } from "./app/stores/timer";
 
 export namespace UIService {
@@ -15,9 +15,8 @@ export namespace UIService {
             });
         }
         timerThread();
-        renderTimer();
+        renderApp();
         isMounted = true;
-        print("Is Mounted!");
     }
     export function showTimer() {
         timerProducer.visible(true);
@@ -28,6 +27,6 @@ export namespace UIService {
     export function remount() {
         // const playerGui = new Instance("ScreenGui", game.GetService("Players").LocalPlayer.WaitForChild("PlayerGui"));
         // timerProducer.mount(playerGui);
-        if (isMounted) renderTimer();
+        if (isMounted) renderApp();
     }
 }
