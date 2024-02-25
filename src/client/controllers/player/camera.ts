@@ -1,3 +1,7 @@
+import { BaseComponent } from "@flamework/components";
+import { Controller } from "@flamework/core";
+import { OnCharacterLoaded } from "./signals";
+
 const camera = game.GetService("Workspace").WaitForChild("Camera") as Camera;
 const player = game.GetService("Players").LocalPlayer;
 
@@ -18,9 +22,11 @@ function initCameraTick() {
 		}
 	})
 }
-
-player.CharacterAdded.Connect(function () {
-	camera!.CameraType = Enum.CameraType.Scriptable;
-	camera!.FieldOfView = 40;
-	initCameraTick();
-});
+@Controller()
+export class CameraController extends BaseComponent implements OnCharacterLoaded {
+	onCharacterLoaded() {
+		camera!.CameraType = Enum.CameraType.Scriptable;
+		camera!.FieldOfView = 40;
+		initCameraTick();
+	}
+}
