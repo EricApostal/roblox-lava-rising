@@ -10,11 +10,6 @@ export function Timer() {
 	const producer = useRootProducer();
 	const count = useRootSelector((state: RootState) => (state as RootState).count);
 
-	task.spawn(function() {
-		wait(1)
-		producer.increment()
-	});
-
 	return (
 		<frame
 			Size={new UDim2(0, 200, 0, 75)}
