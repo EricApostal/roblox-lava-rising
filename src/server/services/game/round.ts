@@ -9,15 +9,6 @@ Events.event.connect((message) => {
     print(`Event received, ${message}`);
 });
 
-@Service()
-export class GameStartListener implements OnGameStarted {
-    onGameStarted() {
-        print("Game started!");
-        wait(Config.roundLength);
-        close();
-    }
-}
-
 export namespace RoundManager {
     let players: Player[] = [];
 
@@ -30,6 +21,9 @@ export namespace RoundManager {
         if (index !== -1) {
             players.remove(index);
         }
+        // if (players.size() === 0) {
+        //     RoundManager.endRound();
+        // }
     }
 
     export function getPlayers() {
@@ -42,5 +36,6 @@ export namespace RoundManager {
 
     export function endRound() {
         close();
+        players = [];
     }
 }

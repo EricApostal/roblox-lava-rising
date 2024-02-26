@@ -28,6 +28,9 @@ export interface OnPlayerCharacterLoaded {
 export interface OnLocalCharacterLoaded {
     onLocalCharacterLoaded(character: Model): void;
 }
+export interface OnPlayerDied {
+    onPlayerDied(player: Player): void;
+}
 
 
 @Service()
@@ -129,6 +132,33 @@ export class PlayerCharacterLoadService extends BaseComponent implements OnPlaye
             for (const listener of listeners) {
                 task.spawn(() => listener.onPlayerCharacterLoaded(player, character));
             }
+        });
+    }
+}
+
+@Service()
+@Controller()
+export class OnPlayerDied extends BaseComponent implements OnStart {
+    constructor() {
+        super();
+    }
+
+    onStart() {
+        const listeners = new Set<OnPlayerDied>();
+
+        Modding.onListenerAdded<OnPlayerDied>((object) => listeners.add(object));
+        Modding.onListenerRemoved<OnPlayerDied>((object) => listeners.delete(object));
+
+        let plrAdded = Players.PlayerAdded.Connect((player) => {
+            let chrAdded = player.CharacterAdded.Connect((character) => {
+                (character.FindFirstChild("Humanoid")! as Humanoid).Died.Connect(() => {
+                    for (const listener of listeners) {
+                        task.spawn(() => listener.onPlayerDied(player));
+                    }
+                    // Prevent memory leak (I think)
+                    // chrAdded.Disconnect();
+                });
+            });
         });
     }
 }
