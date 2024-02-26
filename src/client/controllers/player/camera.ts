@@ -11,13 +11,15 @@ const updateThreshhold = 1;
 
 namespace CameraTick {
 	let cameraFollowing: boolean = false;
+	let initialized = false
 
 	export function init() {
+		if (initialized) return;
+		initialized = true;
 		const rootPart = player.Character!.WaitForChild("HumanoidRootPart") as BasePart;
 	
 		task.spawn(function(){
 			while ((player.Character && player.Character.FindFirstChild("Humanoid") && (player.Character.FindFirstChild("Humanoid") as Humanoid).Health > 0)) {
-				print(cameraFollowing)
 				if (cameraFollowing) {
 					let newCFrame = new CFrame(rootPart.Position.add(new Vector3(0, 5, 40))).mul(CFrame.Angles(-0.05, 0, 0));
 					let goal = {"CFrame": newCFrame}

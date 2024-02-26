@@ -5,7 +5,7 @@ import { ReplicatedStorage } from "@rbxts/services";
 import { Config } from "shared/components/game/config";
 
 @Component({tag: "coin-spawn"})
-export class CoinSpawn extends BaseComponent implements OnGameStarted, OnStart {
+export class CoinSpawn extends BaseComponent implements OnStart {
     coin: Model;
     coinExists: boolean = false;
 
@@ -20,10 +20,6 @@ export class CoinSpawn extends BaseComponent implements OnGameStarted, OnStart {
         this.instance.Anchored = true;
         this.instance.CanCollide = false;
         this.instance.Transparency = 1;
-    }
-
-    onGameStarted(): void {
-        assert (this.instance.IsA("BasePart"), "CoinSpawn component must be attached to a BasePart");
 
         this.spawnCoin();
 

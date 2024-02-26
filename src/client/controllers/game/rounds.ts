@@ -7,7 +7,7 @@ import { Config } from "shared/components/game/config";
 @Controller()
 export class RoundService extends BaseComponent implements OnGameStarted, OnGameEnded {
     onGameStarted(): void {
-        UIService.spawnTimer(Config.gameLength);
+        UIService.spawnTimer(Config.roundLength);
         UIService.showTimer();
     }
 

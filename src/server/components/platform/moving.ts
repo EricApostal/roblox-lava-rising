@@ -14,9 +14,7 @@ const tweenInfo = new TweenInfo(updateThreshhold, Enum.EasingStyle.Sine, Enum.Ea
 export class MovingPlatform extends BaseComponent implements OnStart, OnGameStarted {
     onStart(): void {
         assert(this.instance.IsA("BasePart"), "MovingPlatform component must be attached to a BasePart")
-    }
 
-    onGameStarted(gameLength: number): void {
         const platform = this.instance as BasePart;
         const startPosition = platform.Position;
         const endPosition = {"Position": startPosition.add(new Vector3(distance, 0, 0))};
@@ -29,5 +27,9 @@ export class MovingPlatform extends BaseComponent implements OnStart, OnGameStar
             tweenBack.Play();
             wait(updateThreshhold + timeBetweenMovements + 0.1);
         }
+    }
+
+    onGameStarted(gameLength: number): void {
+
     }
 }

@@ -7,13 +7,12 @@ import { GameSession } from "shared/components/game/state";
 export function init() {
     print("Initializing server...");
     wait(3);
-    start();
 }
 
 // On game start
 export function start() {
     GameSession.startGame();
-    Events.startGame.broadcast(Config.gameLength);
+    Events.startGame.broadcast(Config.roundLength);
 }
 
 // On game end

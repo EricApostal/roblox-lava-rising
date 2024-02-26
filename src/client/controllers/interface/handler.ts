@@ -3,18 +3,20 @@ import { timerProducer } from "./app/stores/timer";
 
 export namespace UIService {
     let isMounted: boolean = false;
-
+    
     export function spawnTimer(startTime: number = 0) {
         timerProducer.setValue(startTime);
-        function timerThread() {
-            task.spawn(() => {
-                while (true) {
-                    timerProducer.decrement();
-                    wait(1);
-                }
-            });
+        if (!isMounted) {
+            function timerThread() {
+                task.spawn(() => {
+                    while (true) {
+                        timerProducer.decrement();
+                        wait(1);
+                    }
+                });
+            }
+            timerThread();
         }
-        timerThread();
         renderApp();
         isMounted = true;
     }

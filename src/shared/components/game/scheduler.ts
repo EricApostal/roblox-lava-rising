@@ -68,7 +68,7 @@ export class GameStartService extends BaseComponent implements OnStart {
 
         GameSession.onGameStart.Connect(() => {
             for (const listener of listeners) {
-                task.spawn(() => listener.onGameStarted(Config.gameLength));
+                task.spawn(() => listener.onGameStarted(Config.roundLength));
             }
         });
     }

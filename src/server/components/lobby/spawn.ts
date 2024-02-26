@@ -2,7 +2,7 @@ import { BaseComponent, Component } from "@flamework/components";
 import { OnGameEnded, OnGameStarted } from "shared/components/game/scheduler";
 import { Players } from "@rbxts/services";
 
-@Component({tag: "level-spawn"})
+@Component({tag: "lobby-spawn"})
 export class LobbySpawn extends BaseComponent implements OnGameEnded {
     onGameEnded(): void {
         Players.GetPlayers().forEach((player) => {

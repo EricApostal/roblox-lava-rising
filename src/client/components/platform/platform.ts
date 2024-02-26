@@ -13,7 +13,8 @@ export class PlatformController extends BaseComponent implements OnStart {
 
     onStart(): void {
         assert(this.instance.IsA("BasePart"), "PlatformController: instance is not a BasePart");
-        
+        print("Moving platform raycat init")
+
         this.instance.Anchored = true;
 
         let character = game.GetService("Players").LocalPlayer.Character! as Model || game.GetService("Players").LocalPlayer.CharacterAdded.Wait()[0];

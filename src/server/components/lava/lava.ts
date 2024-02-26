@@ -14,11 +14,11 @@ export class Lava extends BaseComponent implements OnStart, OnLavaRising {
     }
 
     onLavaRising(): void {
-        print("Lava is rising");
-        assert(this.instance.IsA("BasePart"), "Coin component must be attached to a BasePart");
-        while (true) {
-            this.instance.Size = this.instance.Size.add(new Vector3(0, 0.01, 0));
-            wait(0.1);
-        }
+        // print("Lava is rising");
+        // assert(this.instance.IsA("BasePart"), "Coin component must be attached to a BasePart");
+        // while (true) {
+        //     this.instance.Size = this.instance.Size.add(new Vector3(0, 0.01, 0));
+        //     wait(0.1);
+        // }
     }
 }
