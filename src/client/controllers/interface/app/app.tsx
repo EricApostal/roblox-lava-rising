@@ -7,9 +7,13 @@ import { timerProducer } from "./stores/timer";
 const root = createRoot(new Instance("Folder"));
 
 function App() {
-	return <Timer />;
+	return <frame
+		Size={new UDim2(1, 0, 1, 0)}
+		Transparency={1}
+		>
+			<Timer />
+		</frame>;
 }
-
 export function renderApp() {
 	// Don't forget to manually make it visible!
 	const playerGui = new Instance("ScreenGui", game.GetService("Players").LocalPlayer.WaitForChild("PlayerGui"));
