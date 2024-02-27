@@ -1,6 +1,6 @@
 import React, { useEffect } from "@rbxts/react";
 import { RootState, useRootProducer, useRootSelector } from "../store";
-import { createMotion, Motion, MotionGoal } from "@rbxts/ripple";
+import Ripple, { createMotion, Motion, MotionGoal, TweenOptions } from "@rbxts/ripple";
 import { useMotion } from "../hooks.ts/use-motion";
 
 export function Lookahead() {
@@ -11,14 +11,9 @@ export function Lookahead() {
 	const selectVisibility = (state: RootState) => state.lookahead.visible;
 
 	const [visibility, setVisibility] = useMotion(new UDim2(0, -250, 1, 0));
-	
-
-	// producer.subscribe(selectVisibility, (newVisibility) => {
-		
-	// })
 
 	useEffect(() => {
-		setVisibility.spring((visible ? new UDim2(0, 0, 1, 0) : new UDim2(0, -250, 1, 0)))
+		setVisibility.tween((visible ? new UDim2(0, 0, 1, 0) : new UDim2(0, -250, 1, 0)), {time: 0.5, style: Enum.EasingStyle.Quart} as TweenOptions )
 	}, [visibility])
 
 	return  (
