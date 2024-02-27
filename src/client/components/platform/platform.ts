@@ -17,11 +17,11 @@ export class PlatformController extends BaseComponent implements OnStart {
 
         this.instance.Anchored = true;
 
-        let character = game.GetService("Players").LocalPlayer.Character! as Model || game.GetService("Players").LocalPlayer.CharacterAdded.Wait()[0];
         let lastPosition = this.instance.Position;
 
         let firstPlatformStep = true;
         RunService.Heartbeat.Connect(() => {
+            let character = game.GetService("Players").LocalPlayer.Character! as Model || game.GetService("Players").LocalPlayer.CharacterAdded.Wait()[0];
             let torso = character.FindFirstChild("LowerTorso") as BasePart;
 
             if (!this.isOnPlatform(character)) {
