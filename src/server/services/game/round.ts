@@ -21,9 +21,6 @@ export namespace RoundManager {
         if (index !== -1) {
             players.remove(index);
         }
-        // if (players.size() === 0) {
-        //     RoundManager.endRound();
-        // }
     }
 
     export function getPlayers(): Player[] {
