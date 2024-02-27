@@ -8,13 +8,13 @@ export function Lookahead() {
 	const count = useRootSelector((state: RootState) => (state as RootState).lookahead.count);
 	const visible = useRootSelector((state: RootState) => (state as RootState).lookahead.visible);
 
-	const selectVisibility = (state: RootState) => state.lookahead.visible;
-
 	const [visibility, setVisibility] = useMotion(new UDim2(0, -250, 1, 0));
 
 	useEffect(() => {
-		setVisibility.tween((visible ? new UDim2(0, 0, 1, 0) : new UDim2(0, -250, 1, 0)), {time: 0.5, style: Enum.EasingStyle.Quart} as TweenOptions )
-	}, [visibility])
+		setVisibility.tween((visible ? new UDim2(0, 0, 1, 0) : new UDim2(0, -250, 1, 0)), {time: 0.5, style: Enum.EasingStyle.Quart} as TweenOptions );
+	}, [visible]);
+
+	
 
 	return  (
 		<frame

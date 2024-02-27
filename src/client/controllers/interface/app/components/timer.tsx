@@ -5,7 +5,7 @@ import { RootState, useRootProducer, useRootSelector } from "../store";
 export function Timer() {
 	const producer = useRootProducer();
 	const count = useRootSelector((state: RootState) => (state as RootState).timer.count);
-	const visible = useRootSelector((state: RootState) => (state as RootState).timer.count);
+	const visible = useRootSelector((state: RootState) => (state as RootState).timer.visible);
 
 	return visible ? (
 		<frame

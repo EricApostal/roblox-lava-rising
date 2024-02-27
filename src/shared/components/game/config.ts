@@ -1,5 +1,5 @@
 export namespace Config {
-    export const roundLength = 60;
+    export const roundLength = 5;
     export const timeBetweenRounds = 5;
     export const roundLookahead = 3;
     export const coinRespawnTime = 5;

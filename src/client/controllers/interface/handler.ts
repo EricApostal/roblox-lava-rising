@@ -30,6 +30,7 @@ export namespace UIService {
         producer.timerVisible(false);
     }
     export function remount() {
+        print("remounting");
         // const playerGui = new Instance("ScreenGui", game.GetService("Players").LocalPlayer.WaitForChild("PlayerGui"));
         // timerProducer.mount(playerGui);
         if (isMounted) renderApp();
