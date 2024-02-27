@@ -38,7 +38,7 @@ export class RoundService extends BaseComponent implements OnStart, OnPlayerDied
             
             print("Starting round in loop...")
             RoundManager.startRound();
-            wait(Config.roundLength - Config.roundLookahead);
+            wait(Config.roundLength);
             print("Ending round in loop...")
             RoundManager.endRound();
             wait(1);
