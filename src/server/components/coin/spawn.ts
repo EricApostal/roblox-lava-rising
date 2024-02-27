@@ -33,7 +33,7 @@ export class CoinSpawn extends BaseComponent implements OnStart {
         });
     }
 
-    spawnCoin() {
+    private spawnCoin() {
         assert (this.instance.IsA("BasePart"), "CoinSpawn component must be attached to a BasePart");
         
         this.coin = ReplicatedStorage.FindFirstChild("assets")!.WaitForChild("coin").Clone() as Model;
