@@ -1,6 +1,6 @@
 import React, { useEffect } from "@rbxts/react";
 import { RootState, useRootProducer, useRootSelector } from "../store";
-import Ripple, { createMotion, Motion, MotionGoal, TweenOptions } from "@rbxts/ripple";
+import { TweenOptions } from "@rbxts/ripple";
 import { useMotion } from "../hooks.ts/use-motion";
 
 export function Lookahead() {
@@ -13,8 +13,6 @@ export function Lookahead() {
 	useEffect(() => {
 		setVisibility.tween((visible ? new UDim2(0, 0, 1, 0) : new UDim2(0, -250, 1, 0)), {time: 0.5, style: Enum.EasingStyle.Quart} as TweenOptions );
 	}, [visible]);
-
-	
 
 	return  (
 		<frame
