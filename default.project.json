@@ -1,5 +1,5 @@
 {
-	"name": "flamework-game",
+	"name": "lava-rising",
 	"globIgnorePaths": [
 		"**/package.json",
 		"**/tsconfig.json"
