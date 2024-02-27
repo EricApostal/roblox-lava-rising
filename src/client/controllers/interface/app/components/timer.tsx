@@ -9,18 +9,26 @@ export function Timer() {
 
 	return visible ? (
 		<frame
-			Size={new UDim2(0, 200, 0, 75)}
+			Size={new UDim2(0, 400, 0, 50)}
 			Position={new UDim2(0.5, 0, 0, 0)}
 			AnchorPoint={new Vector2(0.5, 0)}
+			// BackgroundColor3={new Color3(1, 1, 1)}
 			BorderSizePixel={0}
-			BackgroundColor3={new Color3(1, 1, 1)}
+			BackgroundTransparency={1}
 			children={[
-				<uicorner CornerRadius={new UDim(0, 12)}></uicorner>,
+				// <uicorner CornerRadius={new UDim(0, 12)}></uicorner>,
 				<textlabel
 					Position={new UDim2(0.5, 0, 0.5, 0)}
 					AnchorPoint={new Vector2(0.5, 0)}
 					Text={`${count}`}
-					FontSize={Enum.FontSize.Size18}
+					FontSize={Enum.FontSize.Size96}
+					Font={Enum.Font.LuckiestGuy}
+					TextColor3={new Color3(1, 1, 1)}
+					children={[
+						<uistroke
+						Thickness={8}
+						/>
+					]}
 				/>,
 			]}
 		></frame>

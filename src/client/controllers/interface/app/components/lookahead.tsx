@@ -1,17 +1,31 @@
-import React from "@rbxts/react";
+import React, { useEffect } from "@rbxts/react";
 import { RootState, useRootProducer, useRootSelector } from "../store";
+import { createMotion, Motion, MotionGoal } from "@rbxts/ripple";
+import { useMotion } from "../hooks.ts/use-motion";
 
 export function Lookahead() {
 	const producer = useRootProducer();
 	const count = useRootSelector((state: RootState) => (state as RootState).lookahead.count);
 	const visible = useRootSelector((state: RootState) => (state as RootState).lookahead.visible);
 
+	const selectVisibility = (state: RootState) => state.lookahead.visible;
+
+	const [visibility, setVisibility] = useMotion(new UDim2(0, -250, 1, 0));
 	
-	return visible ? (
+
+	// producer.subscribe(selectVisibility, (newVisibility) => {
+		
+	// })
+
+	useEffect(() => {
+		setVisibility.spring((visible ? new UDim2(0, 0, 1, 0) : new UDim2(0, -250, 1, 0)))
+	}, [visibility])
+
+	return  (
 		<frame
 			Size={new UDim2(0, 200, 0, 75)}
-			Position={new UDim2(0, 0, 1, -10)}
-			AnchorPoint={new Vector2(0.5, 0)}
+			Position={visibility}
+			AnchorPoint={new Vector2(0, 1)}
 			BorderSizePixel={0}
 			BackgroundColor3={new Color3(1, 1, 1)}
 			children={[
@@ -24,5 +38,5 @@ export function Lookahead() {
 				/>,
 			]}
 		></frame>
-	): <frame/>;
+	);
 }

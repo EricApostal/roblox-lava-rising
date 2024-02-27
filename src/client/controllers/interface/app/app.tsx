@@ -12,7 +12,7 @@ function App() {
 		Size={new UDim2(1, 0, 1, 0)}
 		Transparency={1}>
 			<Timer />
-			{/* <Lookahead /> */}
+			<Lookahead />
 		</frame>;
 }
 export function renderApp() {

@@ -22,9 +22,11 @@ export namespace UIService {
         isMounted = true;
     }
     export function showTimer() {
+        producer.lookaheadVisible(true);
         producer.timerVisible(true);
     }
     export function hideTimer() {
+        producer.lookaheadVisible(false);
         producer.timerVisible(false);
     }
     export function remount() {
