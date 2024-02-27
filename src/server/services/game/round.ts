@@ -26,7 +26,7 @@ export namespace RoundManager {
         // }
     }
 
-    export function getPlayers() {
+    export function getPlayers(): Player[] {
         return players;
     }
 
