@@ -1,17 +1,18 @@
 import React, { StrictMode, useState } from "@rbxts/react";
 import { createPortal, createRoot } from "@rbxts/react-roblox";
 import { Timer } from "./components/timer";
+import { Lookahead } from "./components/lookahead";
 import { ReflexProvider } from "@rbxts/react-reflex";
-import { timerProducer } from "./stores/timer";
+import { producer } from "./store";
 
 const root = createRoot(new Instance("Folder"));
 
 function App() {
 	return <frame
 		Size={new UDim2(1, 0, 1, 0)}
-		Transparency={1}
-		>
+		Transparency={1}>
 			<Timer />
+			{/* <Lookahead /> */}
 		</frame>;
 }
 export function renderApp() {
@@ -19,7 +20,7 @@ export function renderApp() {
 	const playerGui = new Instance("ScreenGui", game.GetService("Players").LocalPlayer.WaitForChild("PlayerGui"));
 	root.render(
 		<StrictMode>
-			<ReflexProvider producer={timerProducer}>
+			<ReflexProvider producer={producer}>
 				{createPortal(<App />, playerGui)}
 			</ReflexProvider>
 		</StrictMode>);

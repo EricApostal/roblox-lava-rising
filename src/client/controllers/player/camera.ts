@@ -16,10 +16,20 @@ namespace CameraTick {
 	export function init() {
 		if (initialized) return;
 		initialized = true;
-	
+
+		// let surfaceLight: SurfaceLight = new Instance("SurfaceLight") as SurfaceLight;
+		// let lightMount: Part = new Instance("Part") as Part;
+		// lightMount.Anchored = true;
+		// lightMount.Transparency = 1;
+		// surfaceLight.Parent = lightMount;
+		// surfaceLight.Range = 50;
+		// surfaceLight.Angle = 36;
+		// lightMount.Parent = camera;
+
 		task.spawn(function(){
 			while ((player.Character && player.Character.FindFirstChild("Humanoid"))) {
 				if (cameraFollowing) {
+					// lightMount.Position = camera.CFrame.Position;
 					const rootPart = player.Character!.WaitForChild("HumanoidRootPart") as BasePart;
 					let newCFrame = new CFrame(rootPart.Position.add(new Vector3(0, 5, 40))).mul(CFrame.Angles(-0.05, 0, 0));
 					let goal = {"CFrame": newCFrame}

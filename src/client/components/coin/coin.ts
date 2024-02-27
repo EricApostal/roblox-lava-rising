@@ -10,12 +10,16 @@ export class Coin extends BaseComponent implements OnStart, OnGameStarted {
 
     onStart(): void {
         assert(this.instance.IsA("Model"), "Coin component must be attached to a BasePart");
+        this.instance.WaitForChild("Centerpart");
+        
+        // let light = new Instance("PointLight");
+        // light.Parent = this.instance.WaitForChild("Centerpart");
 
-        this.instance.WaitForChild("Centerpart")
         while (this.instance.PrimaryPart !== undefined) {
 	        this.instance.PivotTo(this.instance.PrimaryPart!.CFrame.mul(CFrame.fromEulerAnglesXYZ(0, .1, 0)));
 	        wait();
         }
+
     }
 
     onGameStarted(): void {

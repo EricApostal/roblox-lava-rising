@@ -1,5 +1,4 @@
-import { UseProducerHook, UseSelectorHook, useProducer, useSelector } from "@rbxts/react-reflex";
-import { InferState, createProducer } from "@rbxts/reflex";
+import { createProducer } from "@rbxts/reflex";
 
 export interface TimerState {
     count: number;
@@ -14,16 +13,10 @@ const initialState: TimerState = {
 };
 
 export const timerProducer = createProducer(initialState, {
-	increment: (state) => ({ ...state, count: state.count + 1 }),
-    decrement: (state) => ({ ...state, count: state.count - 1 }),
-	setValue: (state, value: number) => ({ ...state, count: value }),
-    visible: (state, newState: boolean) => ({ ...state, visible: newState }),
+	incrementTimer: (state) => ({ ...state, count: state.count + 1 }),
+    decrementTimer: (state) => ({ ...state, count: state.count - 1 }),
+	setTimer: (state, value: number) => ({ ...state, count: value }),
+    timerVisible: (state, newState: boolean) => ({ ...state, visible: newState }),
     mount: (state, container: ScreenGui) => ({ ...state, container: container}),
 });
-
-export type RootState = InferState<RootProducer>;
-export type RootProducer = typeof timerProducer;
-
-export const useRootProducer: UseProducerHook<RootProducer> = useProducer;
-export const useRootSelector: UseSelectorHook<RootProducer> = useSelector;
 
