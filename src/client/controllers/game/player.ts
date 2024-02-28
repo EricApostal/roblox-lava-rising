@@ -12,6 +12,7 @@ import { OnLocalCharacterLoaded } from "shared/components/game/scheduler";
 @Controller()
 export class CharacterController extends BaseComponent implements OnLocalCharacterLoaded {
     onLocalCharacterLoaded() {
+        Players.LocalPlayer.WaitForChild("PlayerGui").WaitForChild("ScreenGui");
         UIService.remount();
     }
 }

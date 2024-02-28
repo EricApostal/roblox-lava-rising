@@ -1,13 +1,4 @@
-import { Service } from "@flamework/core";
 import { start, close } from "server/game/events";
-import { Events } from "server/network";
-import { Config } from "shared/components/game/config";
-import { OnGameStarted, OnPlayerJoined } from "shared/components/game/scheduler";
-import { GameSession } from "shared/components/game/state";
- 
-Events.event.connect((message) => {
-    print(`Event received, ${message}`);
-});
 
 export namespace RoundManager {
     let players: Player[] = [];
@@ -28,7 +19,7 @@ export namespace RoundManager {
     }
 
     export function startRound() {
-        start();
+        start(players);
     }
 
     export function endRound() {

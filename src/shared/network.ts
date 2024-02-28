@@ -1,13 +1,13 @@
 import { Networking } from "@flamework/networking";
 
 interface ClientToServerEvents {
-    event(param1: string): void;
+    joinRound(): void;
 }
 
 interface ServerToClientEvents {
     startGame(roundTime: number): void;
     endGame(): void;
-    roundStartSoon(lookAhead: number): void;
+    lookahead(lookAhead: number): void;
 }
 
 interface ClientToServerFunctions {

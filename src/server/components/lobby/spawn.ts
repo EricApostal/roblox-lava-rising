@@ -1,7 +1,7 @@
 import { BaseComponent, Component } from "@flamework/components";
 import { OnGameEnded, OnGameStarted } from "shared/components/game/scheduler";
 import { Players } from "@rbxts/services";
-import { RoundManager } from "server/services/game/round";
+import { RoundManager } from "server/services/game/rounds/round";
 
 @Component({tag: "lobby-spawn"})
 export class LobbySpawn extends BaseComponent implements OnGameEnded {

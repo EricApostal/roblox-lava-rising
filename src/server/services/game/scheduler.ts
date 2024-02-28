@@ -1,48 +1,24 @@
-import { Config } from "shared/components/game/config";
-import { RoundManager } from "./round";
 import { BaseComponent } from "@flamework/components";
-import { OnStart, Service } from "@flamework/core";
-import { OnGameEnded, OnPlayerDied } from "shared/components/game/scheduler";
+import { Modding, OnStart, Service } from "@flamework/core";
+import { Events } from "server/network"
+
+export interface OnPlayerJoinedRound {
+    onPlayerJoinedRound(player: Player): void;
+}
 
 @Service()
-export class RoundService extends BaseComponent implements OnStart, OnPlayerDied, OnGameEnded {
-    roundTask?: thread;
-    
-    onStart() {
-        wait(5);
-        this.roundThread();
-    }
+export class PlayerJoinedRoundService extends BaseComponent implements OnStart {
+    onStart(): void {
+        const listeners = new Set<OnPlayerJoinedRound>();
 
-    onPlayerDied(player: Player): void {
-        RoundManager.removePlayerFromRound(player);
-        if (RoundManager.getPlayers().size() === 0) {
-            RoundManager.endRound();
-            wait(5);
-        }
-    }
+        Modding.onListenerAdded<OnPlayerJoinedRound>((object) => listeners.add(object));
+        Modding.onListenerRemoved<OnPlayerJoinedRound>((object) => listeners.delete(object));
 
-    onGameEnded(): void {
-        if(this.roundTask) {
-            task.cancel(this.roundTask);
-        } else {
-            print("Round task is null");
-        }
-        this.roundThread();
-    }
-
-    private roundThread() {
-        this.roundTask = task.spawn(() => {
-            wait(Config.timeBetweenRounds - Config.roundLookahead);
-            print("Round lookahead event fires here");
-            wait(Config.roundLookahead)
-            
-            print("Starting round in loop...")
-            RoundManager.startRound();
-            wait(Config.roundLength);
-            print("Ending round in loop...")
-            RoundManager.endRound();
-            wait(1);
+        Events.joinRound.connect((player) => {
+            for (const listener of listeners) {
+                task.spawn(() => listener.onPlayerJoinedRound(player));
+            }
         });
+    
     }
-
 }

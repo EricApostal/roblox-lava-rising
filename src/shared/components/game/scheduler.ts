@@ -32,7 +32,6 @@ export interface OnPlayerDied {
     onPlayerDied(player: Player): void;
 }
 
-
 @Service()
 @Controller()
 export class PlayerJoinService extends BaseComponent implements OnStart {
@@ -163,12 +162,36 @@ export class OnPlayerDied extends BaseComponent implements OnStart {
     }
 }
 
+export interface OnLookAhead {
+    onLookAhead(lookAhead: number): void;
+}
+
+@Service()
+@Controller()
+export class OnLookAheadService extends BaseComponent implements OnStart {
+    constructor() {
+        super();
+    }
+
+    onStart() {
+        const listeners = new Set<OnLookAhead>();
+
+        Modding.onListenerAdded<OnLookAhead>((object) => listeners.add(object));
+        Modding.onListenerRemoved<OnLookAhead>((object) => listeners.delete(object));
+
+        GameSession.onLookahead.Connect(() => {
+            for (const listener of listeners) {
+                task.spawn(() => listener.onLookAhead(Config.roundLookahead));
+            }
+        });
+    }
+}
+
 /*
 LOCAL ONLY! 
 Why is it in replicated storage? I felt like it.
 */
 
-@Service()
 @Controller()
 export class CharacterLoadedService extends BaseComponent implements OnPlayerCharacterLoaded, OnStart {
     listeners = new Set<OnLocalCharacterLoaded>();

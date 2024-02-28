@@ -6,6 +6,7 @@ export namespace GameSession {
 
     export const onGameStart = new Signal();
     export const onGameEnd = new Signal();
+    export const onLookahead = new Signal();
 
     export function startGame() {
         _gameStarted = true;
@@ -14,5 +15,9 @@ export namespace GameSession {
 
     export function endGame() {
         onGameEnd.Fire();
+    }
+
+    export function lookahead() {
+        onLookahead.Fire();
     }
 }

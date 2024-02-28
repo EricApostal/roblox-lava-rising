@@ -13,3 +13,7 @@ Events.startGame.connect(function() {
 Events.endGame.connect(function() {
     GameSession.endGame();
 })
+
+Events.lookahead.connect(function() {
+    GameSession.lookahead();
+});
