@@ -23,7 +23,7 @@ export namespace RoundManager {
     }
 
     export function endRound() {
-        close();
+        close(players); 
         players = [];
     }
 }

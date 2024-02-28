@@ -15,13 +15,13 @@ export function start(players: Player[]) {
 
     for (const player of players) {
         Events.startGame.fire(player, Config.roundLength)
-    }
+    } 
 }
 
 // On game end
-export function close() {
-    GameSession.endGame();
-    Events.endGame.broadcast();
+export function close(players: Player[]) {
+    GameSession.endGame(players); 
+    Events.endGame.broadcast(players);
 }
 
 // On lookahead

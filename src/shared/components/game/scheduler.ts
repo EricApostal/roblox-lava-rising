@@ -14,7 +14,7 @@ export interface OnGameStarted {
 }
 
 export interface OnGameEnded {
-    onGameEnded(): void;
+    onGameEnded(players: Player[]): void;
 }
 
 export interface OnLavaRising {
@@ -89,9 +89,9 @@ export class GameEndService extends BaseComponent implements OnStart {
         Modding.onListenerAdded<OnGameEnded>((object) => listeners.add(object));
         Modding.onListenerRemoved<OnGameEnded>((object) => listeners.delete(object));
 
-        GameSession.onGameEnd.Connect(() => {
+        GameSession.onGameEnd.Connect((players) => {
             for (const listener of listeners) {
-                task.spawn(() => listener.onGameEnded());
+                task.spawn(() => listener.onGameEnded(players));
             }
         });
     }

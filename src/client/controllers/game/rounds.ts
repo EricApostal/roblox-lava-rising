@@ -17,7 +17,6 @@ export class RoundService extends BaseComponent implements OnGameStarted, OnGame
     }
 
     onLookAhead(lookAhead: number): void {
-        print("look ahead");
         UIService.setLookahead(lookAhead);
         UIService.showLookahead();
         wait(lookAhead);

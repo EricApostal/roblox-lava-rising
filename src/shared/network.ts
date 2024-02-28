@@ -6,7 +6,7 @@ interface ClientToServerEvents {
 
 interface ServerToClientEvents {
     startGame(roundTime: number): void;
-    endGame(): void;
+    endGame(players: Player[]): void; 
     lookahead(lookAhead: number): void;
 }
 

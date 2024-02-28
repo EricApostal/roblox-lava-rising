@@ -33,7 +33,6 @@ export class RoundService extends BaseComponent implements OnStart, OnPlayerDied
     }
 
     onPlayerJoinedRound(player: Player): void {
-        print("GOT PLAYER JOIN ROUND REQUEST!!!")
         RoundManager.addPlayerToRound(player);
     }
 

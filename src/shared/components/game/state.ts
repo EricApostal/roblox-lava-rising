@@ -5,7 +5,7 @@ export namespace GameSession {
     let _gameStarted = false;
 
     export const onGameStart = new Signal();
-    export const onGameEnd = new Signal();
+    export const onGameEnd = new Signal<(players: Player[]) => void>();
     export const onLookahead = new Signal();
 
     export function startGame() {
@@ -13,8 +13,8 @@ export namespace GameSession {
         onGameStart.Fire();
     }
 
-    export function endGame() {
-        onGameEnd.Fire();
+    export function endGame(players: Player[] = []) {
+        onGameEnd.Fire(players);
     }
 
     export function lookahead() {
