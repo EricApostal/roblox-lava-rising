@@ -1,3 +1,4 @@
+import { Config } from "shared/components/game/config";
 import { renderApp } from "./app/app";
 import { producer } from "./app/store";
 
@@ -35,6 +36,12 @@ export namespace UIService {
         producer.setLookahead(lookahead);
     }
     export function showLookahead() {
+        task.spawn(() => {
+            for (let i = 0; i < Config.roundLookahead; i++){
+                producer.decrementLookahead();
+                wait(1);
+            }
+        });
         producer.lookaheadVisible(true);
     }
     export function hideLookahead() {

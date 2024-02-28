@@ -55,6 +55,7 @@ namespace CameraTick {
 @Controller()
 export class CameraController extends BaseComponent implements OnGameStarted, OnGameEnded, OnLocalCharacterLoaded {
 	onGameStarted() {
+		wait(0) // shit way to prevent camera from panning from spawn
 		camera!.CameraType = Enum.CameraType.Scriptable;
 		camera!.FieldOfView = 40;
 		CameraTick.init();
