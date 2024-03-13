@@ -13,7 +13,6 @@ export class PlatformController extends BaseComponent implements OnStart {
 
     onStart(): void {
         assert(this.instance.IsA("BasePart"), "PlatformController: instance is not a BasePart");
-        print("Moving platform raycat init")
 
         this.instance.Anchored = true;
 
@@ -35,7 +34,6 @@ export class PlatformController extends BaseComponent implements OnStart {
             if (character && torso) {
                 if (firstPlatformStep) {
                     let newCFrame = torso.CFrame.add(delta.mul(0.1));
-                    // torso.CFrame = newCFrame;
                     const tweenInfo = new TweenInfo(0.1);
                     const pos = TweenService.Create(torso, tweenInfo, {"CFrame": newCFrame});
                     pos.Play();
@@ -70,10 +68,6 @@ export class PlatformController extends BaseComponent implements OnStart {
         
         }
         this.lastCast = raycastResult!.Instance;
-
-        // if (this.castFrames < 10) {
-        //     return false;
-        // }
 
         return raycastResult?.Instance === this.instance;
     }

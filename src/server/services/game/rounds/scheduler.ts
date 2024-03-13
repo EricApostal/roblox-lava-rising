@@ -42,6 +42,11 @@ export class RoundService extends BaseComponent implements OnStart, OnPlayerDied
             print("Round lookahead event fires here");
             lookahead();
             wait(Config.roundLookahead)
+            if (RoundManager.getPlayers().size() === 0) {
+                print("No players in round, skipping round start!");
+                RoundManager.endRound();
+                return;
+            }
             print("Starting round in loop...")
             RoundManager.startRound();
             wait(Config.roundLength);
