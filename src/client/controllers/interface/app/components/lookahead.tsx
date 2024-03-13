@@ -9,7 +9,7 @@ export function Lookahead() {
 	let count = useRootSelector((state: RootState) => (state as RootState).lookahead.count);
 	const visible = useRootSelector((state: RootState) => (state as RootState).lookahead.visible);
 
-	let startPos = new UDim2(0, -380, 1, -20);
+	let startPos = new UDim2(0, -385, 1, -20);
 
 	const [visibility, setVisibility] = useMotion(startPos);
 

@@ -12,11 +12,9 @@ export function Timer() {
 			Size={new UDim2(0, 400, 0, 50)}
 			Position={new UDim2(0.5, 0, 0, 0)}
 			AnchorPoint={new Vector2(0.5, 0)}
-			// BackgroundColor3={new Color3(1, 1, 1)}
 			BorderSizePixel={0}
 			BackgroundTransparency={1}
 			children={[
-				// <uicorner CornerRadius={new UDim(0, 12)}></uicorner>,
 				<textlabel
 					Position={new UDim2(0.5, 0, 0.5, 0)}
 					AnchorPoint={new Vector2(0.5, 0)}
