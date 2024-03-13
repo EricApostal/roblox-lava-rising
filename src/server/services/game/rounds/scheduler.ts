@@ -16,6 +16,10 @@ export class RoundService extends BaseComponent implements OnStart, OnPlayerDied
     }
 
     onPlayerDied(player: Player): void {
+        if (!RoundManager.getPlayers().find(p => p === player)) {
+            return;
+        }
+
         RoundManager.removePlayerFromRound(player);
         if (RoundManager.getPlayers().size() === 0) {
             RoundManager.endRound();
