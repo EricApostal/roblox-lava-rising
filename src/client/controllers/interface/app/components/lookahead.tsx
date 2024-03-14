@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "@rbxts/react";
 import { RootState, useRootProducer, useRootSelector } from "../store";
 import { TweenOptions } from "@rbxts/ripple";
-import { useMotion } from "../hooks.ts/use-motion";
+import { useMotion } from "../hooks/use-motion";
 import { Events } from "client/network";
 
 export function Lookahead() {
