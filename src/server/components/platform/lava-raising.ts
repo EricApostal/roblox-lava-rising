@@ -17,7 +17,7 @@ export class MovingPlatform extends BaseComponent implements OnStart, OnGameStar
 
         const platform = this.instance as BasePart;
         const startSize = platform.Size;
-        const endSize = {"Size": startSize.add(new Vector3(0, distance, 0))};
+        const endSize = {"Size": startSize.add(new Vector3(0, distance, 0)), "CFrame": platform.CFrame.add(new Vector3(0, distance/2, 0))};
 
         let time_offset = this.instance.GetAttribute("time_offset") as number;  
 
@@ -26,7 +26,7 @@ export class MovingPlatform extends BaseComponent implements OnStart, OnGameStar
             const tween = TweenService.Create(platform, tweenInfo, endSize);
 			tween.Play();
             wait(updateThreshhold + timeBetweenMovements + 0.1);
-            const tweenBack = TweenService.Create(platform, tweenInfo, {"Size": startSize});
+            const tweenBack = TweenService.Create(platform, tweenInfo, {"Size": startSize, "CFrame": platform.CFrame.add(new Vector3(0, -distance/2, 0))});
             tweenBack.Play();
             wait(updateThreshhold + timeBetweenMovements + 0.1);
         }
