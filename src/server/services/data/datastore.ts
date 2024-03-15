@@ -2,10 +2,8 @@ import { BaseComponent } from "@flamework/components";
 import { OnStart, Service } from "@flamework/core";
 import { Collection, CollectionOptions, Document, createCollection } from "@rbxts/lapis";
 import { t } from "@rbxts/t";
-import AutoSave from "@rbxts/lapis/out/lapis/AutoSave";
 import { OnPlayerJoined } from "shared/components/game/scheduler";
 import { LeaderboardService } from "./leaderboard";
-import { Players } from "@rbxts/services";
 
 export class DataNode {
     coins: number;
