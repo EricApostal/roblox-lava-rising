@@ -2,7 +2,7 @@ import { BaseComponent } from "@flamework/components";
 import { OnStart, Service } from "@flamework/core";
 import { Collection, CollectionOptions, Document, createCollection } from "@rbxts/lapis";
 import { t } from "@rbxts/t";
-import { OnPlayerJoined } from "shared/components/game/scheduler";
+import { OnPlayerJoined, OnPlayerLeaving } from "shared/components/game/scheduler";
 import { LeaderboardService } from "./leaderboard";
 
 export class DataNode {
@@ -18,7 +18,7 @@ let collection: Collection<{ coins: number, games_played: number }>;
 let documents = new Map<string, Document<{ coins: number, games_played: number }>>();
 
 @Service()
-class _DatastoreService extends BaseComponent implements OnPlayerJoined {
+class _DatastoreService extends BaseComponent implements OnPlayerJoined, OnPlayerLeaving {
     constructor() {
         super();
         collection = createCollection("PlayerData", {
@@ -36,6 +36,11 @@ class _DatastoreService extends BaseComponent implements OnPlayerJoined {
             LeaderboardService.setValue(player, "Coins", DatastoreService.getCoins(player));
             DatastoreService.incrementCoins(player, 1);
         });
+    }
+
+    onPlayerLeaving(player: Player): void {
+        documents.get(`${player.UserId}`)!.save();
+        documents.delete(`${player.UserId}`);
     }
 }
 
