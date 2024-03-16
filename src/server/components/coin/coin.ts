@@ -20,7 +20,7 @@ export class Coin extends BaseComponent implements OnStart {
                 let playerObj = ( Players.GetPlayerFromCharacter(humanoid.Parent) as Player)
                 DatastoreService.incrementCoins(playerObj, 1)
                 let currentPlayerCoins = DatastoreService.getCoins(playerObj)
-                Events.coinPickup.fire(playerObj, 1, currentPlayerCoins + 1)
+                Events.coinPickup.fire(playerObj, 1, currentPlayerCoins)
             }
         });
     }
