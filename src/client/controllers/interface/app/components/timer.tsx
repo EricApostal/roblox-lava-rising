@@ -24,11 +24,11 @@ export function Timer() {
 					TextColor3={new Color3(1, 1, 1)}
 					children={[
 						<uistroke
-						Thickness={8}
+							Thickness={8}
 						/>
 					]}
 				/>,
 			]}
 		></frame>
-	): <frame/>;
+	) : <frame />;
 }

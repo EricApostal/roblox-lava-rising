@@ -4,15 +4,18 @@ import { Timer } from "./components/timer";
 import { Lookahead } from "./components/lookahead";
 import { ReflexProvider } from "@rbxts/react-reflex";
 import { producer } from "./store";
+import { Sidebar } from "./components/sidebar/sidebar";
 
 const root = createRoot(new Instance("Folder"));
 
 function App() {
+	print("app mounted")
 	return <frame
 		Size={new UDim2(1, 0, 1, 0)}
 		Transparency={1}>
 			<Timer />
 			<Lookahead />
+			<Sidebar />
 		</frame>;
 }
 export function renderApp() {

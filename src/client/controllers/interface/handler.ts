@@ -19,8 +19,6 @@ export namespace UIService {
             }
             timerThread();
         }
-        renderApp();
-        isMounted = true;
     }
     export function showTimer() {
         producer.timerVisible(true);
@@ -29,10 +27,13 @@ export namespace UIService {
         producer.timerVisible(false);
     }
     export function remount() {
-        if (isMounted) renderApp();
+        //if (isMounted) {
+            renderApp()
+            isMounted = true;
+            spawnSidebar()
+        //};
     }
     export function setLookahead(lookahead: number) {
-        renderApp();
         producer.setLookahead(lookahead);
     }
     export function showLookahead() {
@@ -46,5 +47,9 @@ export namespace UIService {
     }
     export function hideLookahead() {
         producer.lookaheadVisible(false);
+    }
+    export function spawnSidebar() {
+        // renderApp();
+        producer.sidebarVisible(true);
     }
 }
