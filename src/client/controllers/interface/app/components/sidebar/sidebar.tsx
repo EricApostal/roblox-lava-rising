@@ -21,9 +21,16 @@ export function Sidebar() {
                     SortOrder={Enum.SortOrder.LayoutOrder}
                     Padding={new UDim(0, 16)}
                 />,
-                <SidebarIcon />,
-                <SidebarIcon />,
-
+                <SidebarIcon
+                    iconId={"16767161139"}
+                    gradientStart={Color3.fromHex("5BA0F0")}
+                    gradientEnd={Color3.fromHex("005DEA")}
+                />,
+                <SidebarIcon
+                    iconId={"16767142418"}
+                    gradientStart={Color3.fromHex("FF9999")}
+                    gradientEnd={Color3.fromHex("FD0000")}
+                />,
             ]}
         ></frame>
     )
