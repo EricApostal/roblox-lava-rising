@@ -7,18 +7,15 @@ export namespace UIService {
 
     export function spawnTimer(startTime: number = 0) {
         producer.setTimer(startTime);
-        
-        if (!isMounted) {
-            function timerThread() {
-                task.spawn(() => {
-                    while (true) {
-                        producer.decrementTimer();
-                        wait(1);
-                    }
-                });
+    
+        // Start timer
+        task.spawn(() => {
+            while (true) {
+                producer.decrementTimer();
+                wait(1);
             }
-            timerThread();
-        }
+        });
+
     }
     export function showTimer() {
         producer.timerVisible(true);
@@ -27,11 +24,8 @@ export namespace UIService {
         producer.timerVisible(false);
     }
     export function remount() {
-        //if (isMounted) {
-            renderApp()
-            isMounted = true;
-            spawnSidebar()
-        //};
+        renderApp()
+        isMounted = true;
     }
     export function setLookahead(lookahead: number) {
         producer.setLookahead(lookahead);
@@ -49,7 +43,6 @@ export namespace UIService {
         producer.lookaheadVisible(false);
     }
     export function spawnSidebar() {
-        // renderApp();
         producer.sidebarVisible(true);
     }
 }
