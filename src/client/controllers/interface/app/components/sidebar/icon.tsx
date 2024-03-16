@@ -1,16 +1,12 @@
 import React from "@rbxts/react";
-import { ReflexProvider } from "@rbxts/react-reflex";
-import { RootState, useRootProducer, useRootSelector } from "../../store";
 
 export function SidebarIcon() {
-    const producer = useRootProducer();
-    let count = useRootSelector((state: RootState) => (state as RootState).lookahead.count);
-    const visible = useRootSelector((state: RootState) => (state as RootState).lookahead.visible);
-
     return (
-        <frame
+        <textbutton
             Size={new UDim2(0, 70, 0, 70)}
             BackgroundColor3={new Color3(1, 1, 1)}
+            BackgroundTransparency={0}
+            Text={""}
             children={[
                 <textlabel
                     Text={"Icon"}
@@ -18,13 +14,31 @@ export function SidebarIcon() {
                     BackgroundTransparency={1}
                 />,
                 <uicorner
-                    CornerRadius={new UDim(0, 22)}
+                    CornerRadius={new UDim(0, 24)}
                 />,
-                <uistroke
-                    Thickness={4}
+                <uigradient
+                    Color={
+                        new ColorSequence([
+                            new ColorSequenceKeypoint(0, Color3.fromHex("FF9999")),
+                            new ColorSequenceKeypoint(1, Color3.fromHex("FD0000")),
+                        ])
+                    }
+                    Rotation={45}
+                />,
+                <frame
+                    Size={new UDim2(0, 70, 0, 70)}
+                    BackgroundTransparency={1}
+                    children={[
+                        <uicorner
+                            CornerRadius={new UDim(0, 24)}
+                        />,
+                        <uistroke
+                            Color={Color3.fromRGB(0, 0, 0)} // Black stroke 
+                            Thickness={4}
+                        />,
+                    ]}
                 />
             ]}
-
-        ></frame>
+        />
     )
 }
