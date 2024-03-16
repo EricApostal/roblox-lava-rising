@@ -5,15 +5,6 @@ import { t } from "@rbxts/t";
 import { OnPlayerJoined, OnPlayerLeaving } from "shared/components/game/scheduler";
 import { LeaderboardService } from "./leaderboard";
 
-export class DataNode {
-    coins: number;
-    games_played: number;
-    constructor(coins: number, games_played: number) {
-        this.coins = coins;
-        this.games_played = games_played;
-    }
-}
-
 let collection: Collection<{ coins: number, games_played: number }>;
 let documents = new Map<string, Document<{ coins: number, games_played: number }>>();
 
@@ -46,7 +37,12 @@ class _DatastoreService extends BaseComponent implements OnPlayerJoined, OnPlaye
 
 export namespace DatastoreService {
     export function getCoins(player: Player): number {
-        return documents.get(`${player.UserId}`)!.read().coins;
+        let document;
+        while (!document) {
+            document = documents.get(`${player.UserId}`)!;
+            wait(0.1);
+        }
+        return document.read().coins;
     }
 
     export function setCoins(player: Player, value: number): void {

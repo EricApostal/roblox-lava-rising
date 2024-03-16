@@ -12,7 +12,7 @@ interface ServerToClientEvents {
 }
 
 interface ClientToServerFunctions {
-    func(param: string): void;
+    getCoins(): number;
 }
 
 interface ServerToClientFunctions {
