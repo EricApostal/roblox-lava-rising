@@ -4,6 +4,7 @@ import { Modding } from "@flamework/core";
 import { BaseComponent } from "@flamework/components";
 import { GameSession } from "./state";
 import { Config } from "./config";
+import { GlobalEvents } from "shared/network";
 
 export interface OnPlayerJoined {
     onPlayerJoined(player: Player): void;
@@ -32,6 +33,7 @@ export interface OnPlayerCharacterLoaded {
 export interface OnLocalCharacterLoaded {
     onLocalCharacterLoaded(character: Model): void;
 }
+
 export interface OnPlayerDied {
     onPlayerDied(player: Player): void;
 }
@@ -239,4 +241,31 @@ export class CharacterLoadedService extends BaseComponent implements OnPlayerCha
             }
         }
     }
+}
+
+export interface OnCoinCollected {
+    onCoinCollected(player: Player, deltaCoins: number, totalCoins: number): void;
+}
+
+@Controller()
+export class OnCoinCollectedService extends BaseComponent implements OnStart {
+    listeners = new Set<OnLocalCharacterLoaded>();
+
+    constructor() {
+        super();
+    }
+
+    onStart(): void {
+        const listeners = new Set<OnCoinCollected>();
+
+        Modding.onListenerAdded<OnCoinCollected>((object) => listeners.add(object));
+        Modding.onListenerRemoved<OnCoinCollected>((object) => listeners.delete(object));
+
+        GameSession.onCoinPickup.Connect((player: Player, coins: number, deltaCoins: number) => {
+            for (const listener of listeners) {
+                task.spawn(() => listener.onCoinCollected(player, coins, deltaCoins));
+            }
+        });
+    }
+
 }

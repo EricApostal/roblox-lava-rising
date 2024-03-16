@@ -7,6 +7,7 @@ export namespace GameSession {
     export const onGameStart = new Signal();
     export const onGameEnd = new Signal<(players: Player[]) => void>();
     export const onLookahead = new Signal();
+    export const onCoinPickup = new Signal<(player: Player, deltaCoins: number, totalCoins: number) => void>();
 
     export function startGame() {
         _gameStarted = true;
@@ -19,5 +20,9 @@ export namespace GameSession {
 
     export function lookahead() {
         onLookahead.Fire();
+    }
+
+    export function coinPickup(player: Player, deltaCoins: number, totalCoins: number) {
+        onCoinPickup.Fire(player, deltaCoins, totalCoins);
     }
 }

@@ -1,7 +1,11 @@
 import React from "@rbxts/react";
 import { ReflexProvider } from "@rbxts/react-reflex";
+import { RootState, useRootProducer, useRootSelector } from "../store";
 
 export function CoinCounter() {
+    const producer = useRootProducer();
+    const count = useRootSelector((state: RootState) => (state as RootState).coins.count);
+
     return (
         <frame
             Size={new UDim2(0, 300, 0, 100)}
@@ -19,17 +23,17 @@ export function CoinCounter() {
                 <textlabel
                     // Position={new UDim2(1, -50, 0.5, 10)}
                     AnchorPoint={new Vector2(1, 0.7)}
-                    Text={`asdf`}
+                    Text={`${count}`}
                     BorderSizePixel={0}
                     BackgroundTransparency={1}
                     Size={new UDim2(0, 200, 0, 100)}
                     FontSize={Enum.FontSize.Size60}
                     Font={Enum.Font.LuckiestGuy}
-                    TextColor3={new Color3(1, 1, 1)}
+                    TextColor3={new Color3(0, 0, 0)}
                     children={[
-                        <uistroke
-                            Thickness={8}
-                        />,
+                        // <uistroke
+                        //     Thickness={8}
+                        // />,
                         <uipadding
                             PaddingTop={new UDim(0, 20)}
                         />

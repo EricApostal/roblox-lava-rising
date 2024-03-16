@@ -45,4 +45,7 @@ export namespace UIService {
     export function spawnSidebar() {
         producer.sidebarVisible(true);
     }
+    export function setCoins(coinValue: number) {
+        producer.setCoins(coinValue);
+    }
 }

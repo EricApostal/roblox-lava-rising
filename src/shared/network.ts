@@ -8,6 +8,7 @@ interface ServerToClientEvents {
     startGame(roundTime: number): void;
     endGame(players: Player[]): void; 
     lookahead(lookAhead: number): void;
+    coinPickup(deltaCoins: number, totalCoins: number): void;
 }
 
 interface ClientToServerFunctions {
