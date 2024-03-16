@@ -8,8 +8,8 @@ interface SidebarIconProps {
 }
 
 export function SidebarIcon(props: SidebarIconProps) {
-    let startSize = new UDim2(0, 70, 0, 70);
-    let endSize = new UDim2(0, 80, 0, 80);
+    let startSize = new UDim2(0, 80, 0, 80);
+    let endSize = new UDim2(0, 90, 0, 90);
 
     const [size, setSize] = useMotion(startSize);
     const [iconRotation, setIconRotation] = useMotion(0);

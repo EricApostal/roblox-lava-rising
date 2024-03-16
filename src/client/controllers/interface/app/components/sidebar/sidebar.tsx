@@ -19,7 +19,7 @@ export function Sidebar() {
                     HorizontalAlignment={Enum.HorizontalAlignment.Center}
                     VerticalAlignment={Enum.VerticalAlignment.Center}
                     SortOrder={Enum.SortOrder.LayoutOrder}
-                    Padding={new UDim(0, 16)}
+                    Padding={new UDim(0, 20)}
                 />,
                 <SidebarIcon
                     iconId={"16767161139"}

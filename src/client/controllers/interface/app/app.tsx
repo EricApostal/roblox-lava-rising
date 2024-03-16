@@ -5,6 +5,7 @@ import { Lookahead } from "./components/lookahead";
 import { ReflexProvider } from "@rbxts/react-reflex";
 import { producer } from "./store";
 import { Sidebar } from "./components/sidebar/sidebar";
+import { CoinCounter } from "./components/coins";
 
 const root = createRoot(new Instance("Folder"));
 
@@ -15,6 +16,7 @@ function App() {
 		<Timer />
 		<Lookahead />
 		<Sidebar />
+		<CoinCounter />
 	</frame>;
 }
 export function renderApp() {
