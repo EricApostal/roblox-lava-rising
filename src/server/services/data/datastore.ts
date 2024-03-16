@@ -34,7 +34,7 @@ class _DatastoreService extends BaseComponent implements OnPlayerJoined, OnPlaye
         collection.load(`${player.UserId}`).then((document) => {
             documents.set(`${player.UserId}`, document);
             LeaderboardService.setValue(player, "Coins", DatastoreService.getCoins(player));
-            DatastoreService.incrementCoins(player, 1);
+            // DatastoreService.incrementCoins(player, 1);
         });
     }
 
