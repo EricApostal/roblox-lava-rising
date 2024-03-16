@@ -1,4 +1,4 @@
-import React from "@rbxts/react";
+import React, { useState } from "@rbxts/react";
 import { useMotion } from "../../hooks/use-motion";
 
 interface SidebarIconProps {
@@ -14,6 +14,8 @@ export function SidebarIcon(props: SidebarIconProps) {
     const [size, setSize] = useMotion(startSize);
     const [iconRotation, setIconRotation] = useMotion(0);
 
+    const [currentRotation, setCurrentRotation] = useState(1);
+
     const handleMouseEnter = () => {
         setSize.tween(endSize, { time: 0.2, style: Enum.EasingStyle.Quart });
     }
@@ -23,7 +25,8 @@ export function SidebarIcon(props: SidebarIconProps) {
     }
 
     const handleMouseClick = () => {
-        setIconRotation.tween(iconRotation.getValue() + 360, { time: 0.5, style: Enum.EasingStyle.Quart });
+        setCurrentRotation(currentRotation + 1);
+        setIconRotation.tween(currentRotation * 360, { time: 0.5, style: Enum.EasingStyle.Quart });
     }
 
     return (
