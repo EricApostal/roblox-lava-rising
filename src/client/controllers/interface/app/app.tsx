@@ -9,14 +9,13 @@ import { Sidebar } from "./components/sidebar/sidebar";
 const root = createRoot(new Instance("Folder"));
 
 function App() {
-	print("app mounted")
 	return <frame
 		Size={new UDim2(1, 0, 1, 0)}
 		Transparency={1}>
-			<Timer />
-			<Lookahead />
-			<Sidebar />
-		</frame>;
+		<Timer />
+		<Lookahead />
+		<Sidebar />
+	</frame>;
 }
 export function renderApp() {
 	// Don't forget to manually make it visible!

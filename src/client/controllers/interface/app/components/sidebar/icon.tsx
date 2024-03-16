@@ -12,6 +12,7 @@ export function SidebarIcon(props: SidebarIconProps) {
     let endSize = new UDim2(0, 80, 0, 80);
 
     const [size, setSize] = useMotion(startSize);
+    const [iconRotation, setIconRotation] = useMotion(0);
 
     const handleMouseEnter = () => {
         setSize.tween(endSize, { time: 0.2, style: Enum.EasingStyle.Quart });
@@ -19,6 +20,10 @@ export function SidebarIcon(props: SidebarIconProps) {
 
     const handleMouseLeave = () => {
         setSize.tween(startSize, { time: 0.2, style: Enum.EasingStyle.Quart });
+    }
+
+    const handleMouseClick = () => {
+        setIconRotation.tween(iconRotation.getValue() + 360, { time: 0.5, style: Enum.EasingStyle.Quart });
     }
 
     return (
@@ -29,7 +34,8 @@ export function SidebarIcon(props: SidebarIconProps) {
             Text={""}
             Event={{
                 MouseEnter: handleMouseEnter,
-                MouseLeave: handleMouseLeave
+                MouseLeave: handleMouseLeave,
+                MouseButton1Click: handleMouseClick
             }}
             children={[
                 <imagelabel
@@ -38,6 +44,7 @@ export function SidebarIcon(props: SidebarIconProps) {
                     AnchorPoint={new Vector2(0.5, 0.5)}
                     Position={new UDim2(0.5, 0, 0.5, 0)}
                     BackgroundTransparency={1}
+                    Rotation={iconRotation}
                 />,
                 <uicorner
                     CornerRadius={new UDim(0, 24)}

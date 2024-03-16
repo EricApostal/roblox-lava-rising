@@ -234,7 +234,6 @@ export class CharacterLoadedService extends BaseComponent implements OnPlayerCha
 
     onPlayerCharacterLoaded(player: Player, character: Model): void {
         if (player === Players.LocalPlayer) {
-            print("Local character loaded from scheduler!");
             for (const listener of this.listeners) {
                 task.spawn(() => listener.onLocalCharacterLoaded(character));
             }

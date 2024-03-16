@@ -43,18 +43,18 @@ export class RoundService extends BaseComponent implements OnStart, OnPlayerDied
     private roundThread() {
         this.roundTask = task.spawn(() => {
             wait(Config.timeBetweenRounds - Config.roundLookahead);
-            print("Round lookahead event fires here");
+            // print("Round lookahead event fires here");
             lookahead();
             wait(Config.roundLookahead)
             if (RoundManager.getPlayers().size() === 0) {
-                print("No players in round, skipping round start!");
+                // print("No players in round, skipping round start!");
                 RoundManager.endRound();
                 return;
             }
-            print("Starting round in loop...")
+            // print("Starting round in loop...")
             RoundManager.startRound();
             wait(Config.roundLength);
-            print("Ending round in loop...")
+            // print("Ending round in loop...")
             RoundManager.endRound();
             wait(1);
         });
