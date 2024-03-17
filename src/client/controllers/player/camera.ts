@@ -48,12 +48,11 @@ namespace CameraTick {
 	export function stopFollowing() {
 		cameraFollowing = false;
 	}
-
-
 }
 
 @Controller()
 export class CameraController extends BaseComponent implements OnGameStarted, OnGameEnded, OnLocalCharacterLoaded {
+
 	onGameStarted() {
 		player.CameraMinZoomDistance = 10;
 		wait(0)

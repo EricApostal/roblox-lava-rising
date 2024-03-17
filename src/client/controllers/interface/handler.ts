@@ -4,10 +4,13 @@ import { producer } from "./app/store";
 
 export namespace UIService {
     let isMounted: boolean = false;
+    let timerStarted = false;
 
     export function spawnTimer(startTime: number = 0) {
         producer.setTimer(startTime);
     
+        if (timerStarted) return;
+        timerStarted = true
         // Start timer
         task.spawn(() => {
             while (true) {
