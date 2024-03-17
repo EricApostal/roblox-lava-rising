@@ -5,3 +5,5 @@ Flamework.addPaths("src/client/controllers");
 Flamework.addPaths("src/shared/components");
 
 Flamework.ignite();
+
+print("Running Client Runtime (1.2)...")
