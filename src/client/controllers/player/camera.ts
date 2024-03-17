@@ -55,16 +55,19 @@ namespace CameraTick {
 @Controller()
 export class CameraController extends BaseComponent implements OnGameStarted, OnGameEnded, OnLocalCharacterLoaded {
 	onGameStarted() {
-		wait(0) // shit way to prevent camera from panning from spawn
+		player.CameraMinZoomDistance = 10;
+		wait(0)
+		// fixes camera panning from spawn, and yields for camera to zoom out
+
 		camera!.CameraType = Enum.CameraType.Scriptable;
 		camera!.FieldOfView = 40;
 		CameraTick.init();
 		CameraTick.startFollowing();
-
 	}
 
 	onGameEnded(): void {
 		CameraTick.stopFollowing();
+		player.CameraMinZoomDistance = 0;
 		camera!.CameraType = Enum.CameraType.Custom;
 		camera!.FieldOfView = 70;
 	}
