@@ -8,7 +8,7 @@ export function CoinCounter() {
 
     return (
         <frame
-            Size={new UDim2(0, 300, 0, 100)}
+            Size={new UDim2(0, 200, 0, 75)}
             Position={new UDim2(1, -20, 1, -20)}
             AnchorPoint={new Vector2(1, 1)}
             BorderSizePixel={0}
@@ -17,7 +17,7 @@ export function CoinCounter() {
             children={[
                 <imagelabel
                     Image={"rbxassetid://16767840840"}
-                    Size={new UDim2(0, 90, 0, 90)}
+                    Size={new UDim2(0, 70, 0, 70)}
                     BackgroundTransparency={1}
                 />,
                 <textlabel
@@ -26,14 +26,11 @@ export function CoinCounter() {
                     Text={`${count}`}
                     BorderSizePixel={0}
                     BackgroundTransparency={1}
-                    Size={new UDim2(0, 200, 0, 100)}
-                    FontSize={Enum.FontSize.Size60}
+                    Size={new UDim2(0, 110, 0, 100)}
+                    FontSize={Enum.FontSize.Size48}
                     Font={Enum.Font.LuckiestGuy}
                     TextColor3={new Color3(0, 0, 0)}
                     children={[
-                        // <uistroke
-                        //     Thickness={8}
-                        // />,
                         <uipadding
                             PaddingTop={new UDim(0, 20)}
                         />
