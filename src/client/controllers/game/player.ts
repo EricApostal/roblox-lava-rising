@@ -7,7 +7,8 @@ import { OnLocalCharacterLoaded } from "shared/components/game/scheduler";
 @Controller()
 export class CharacterController extends BaseComponent implements OnLocalCharacterLoaded, OnStart {
     onLocalCharacterLoaded() {
-        // WARNING: This may not call initially on some devices. Proceed wuth caution.
+        // WARNING: This may not call initially on some devices. Proceed with caution.
+        UIService.remount();
     }
 
     onStart(): void {
