@@ -7,12 +7,12 @@ import { Players } from "@rbxts/services";
 Do not add manually to this, instead bind to the events like a regular human :D
 */
 
-Events.startGame.connect(function() {
-    GameSession.startGame();
+Events.startGame.connect(function(players: Player[]) {
+    GameSession.startGame(players);
 })
 
-Events.endGame.connect(function() {
-    GameSession.endGame();
+Events.endGame.connect(function(players: Player[]) {
+    GameSession.endGame(players);
 })
 
 Events.lookahead.connect(function() {

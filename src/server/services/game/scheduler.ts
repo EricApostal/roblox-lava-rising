@@ -19,6 +19,5 @@ export class PlayerJoinedRoundService extends BaseComponent implements OnStart {
                 task.spawn(() => listener.onPlayerJoinedRound(player));
             }
         });
-    
     }
 }

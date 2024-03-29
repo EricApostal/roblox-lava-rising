@@ -11,7 +11,7 @@ export function init() {
 
 // On game start
 export function start(players: Player[]) {
-    GameSession.startGame();
+    GameSession.startGame(players);
 
     for (const player of players) {
         Events.startGame.fire(player, players, Config.roundLength)
@@ -20,8 +20,8 @@ export function start(players: Player[]) {
 
 // On game end
 export function close(players: Player[]) {
-    GameSession.endGame(players); 
     Events.endGame.broadcast(players);
+    GameSession.endGame(players);
 }
 
 // On lookahead

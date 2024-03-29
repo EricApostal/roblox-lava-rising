@@ -16,12 +16,12 @@ export class RoundService extends BaseComponent implements OnStart, OnPlayerDied
     }
 
     onPlayerDied(player: Player): void {
-        if (!RoundManager.getPlayers().find(p => p === player)) {
+        if (!RoundManager.getInitialPlayers().find(p => p === player)) {
             return;
         }
 
         RoundManager.removePlayerFromRound(player);
-        if (RoundManager.getPlayers().size() === 0) {
+        if (RoundManager.getActivePlayers().size() === 0) {
             RoundManager.endRound();
             wait(5);
         }
@@ -46,7 +46,7 @@ export class RoundService extends BaseComponent implements OnStart, OnPlayerDied
             // print("Round lookahead event fires here");
             lookahead();
             wait(Config.roundLookahead)
-            if (RoundManager.getPlayers().size() === 0) {
+            if (RoundManager.getActivePlayers().size() === 0) {
                 // print("No players in round, skipping round start!");
                 RoundManager.endRound();
                 return;
