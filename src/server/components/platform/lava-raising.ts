@@ -10,7 +10,7 @@ const timeBetweenMovements = 1;
 const tweenInfo = new TweenInfo(updateThreshhold, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut);
 
 @Component({tag:"lava-raising-platform"})
-export class MovingPlatform extends BaseComponent implements OnStart, OnGameStarted {
+export class MovingPlatform extends BaseComponent implements OnStart {
     onStart(): void {
         assert(this.instance.IsA("BasePart"), "MovingPlatform component must be attached to a BasePart")
 
@@ -30,9 +30,5 @@ export class MovingPlatform extends BaseComponent implements OnStart, OnGameStar
             tweenBack.Play();
             wait(updateThreshhold + timeBetweenMovements + 0.1);
         }
-    }
-
-    onGameStarted(gameLength: number): void {
-
     }
 }

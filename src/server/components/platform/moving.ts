@@ -33,7 +33,7 @@ export class MovingPlatform extends BaseComponent implements OnStart, OnGameStar
         }
     }
 
-    onGameStarted(gameLength: number): void {
+    onGameStarted(players: Player[], gameLength: number): void {
 
     }
 }

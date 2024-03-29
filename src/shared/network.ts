@@ -5,7 +5,7 @@ interface ClientToServerEvents {
 }
 
 interface ServerToClientEvents {
-    startGame(roundTime: number): void;
+    startGame(players: Player[], roundTime: number): void;
     endGame(players: Player[]): void; 
     lookahead(lookAhead: number): void;
     coinPickup(deltaCoins: number, totalCoins: number): void;

@@ -15,7 +15,7 @@ export interface OnPlayerLeaving {
 }
 
 export interface OnGameStarted {
-    onGameStarted(gameLength: number): void;
+    onGameStarted(players: Player[], gameLength: number): void;
 }
 
 export interface OnGameEnded {
@@ -99,7 +99,7 @@ export class GameStartService extends BaseComponent implements OnStart {
 
         GameSession.onGameStart.Connect(() => {
             for (const listener of listeners) {
-                task.spawn(() => listener.onGameStarted(Config.roundLength));
+                task.spawn(() => listener.onGameStarted(Players.GetPlayers(), Config.roundLength));
             }
         });
     }

@@ -4,7 +4,7 @@ export namespace RoundManager {
     let players: Player[] = [];
 
     export function addPlayerToRound(player: Player) {
-        players.push(player);
+        if (!players.includes(player)) players.push(player);
     }
 
     export function removePlayerFromRound(player: Player) {

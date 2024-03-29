@@ -14,7 +14,7 @@ export function start(players: Player[]) {
     GameSession.startGame();
 
     for (const player of players) {
-        Events.startGame.fire(player, Config.roundLength)
+        Events.startGame.fire(player, players, Config.roundLength)
     } 
 }
 
