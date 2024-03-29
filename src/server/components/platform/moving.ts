@@ -19,6 +19,9 @@ export class MovingPlatform extends BaseComponent implements OnStart, OnGameStar
         const platform = this.instance as BasePart;
         const startPosition = platform.Position;
         const endPosition = {"Position": startPosition.add(new Vector3(distance, 0, 0))};
+        if (this.instance.GetTags().includes("vertical-moving-platform")) {
+            endPosition["Position"] = startPosition.add(new Vector3(0, distance, 0));
+        }
 
         while (true) {
             const tween = TweenService.Create(platform, tweenInfo, endPosition);
@@ -32,5 +35,12 @@ export class MovingPlatform extends BaseComponent implements OnStart, OnGameStar
 
     onGameStarted(gameLength: number): void {
 
+    }
+}
+
+@Component({tag:"vertical-moving-platform"})
+export class VerticalMovingPlatform extends MovingPlatform {
+    constructor() {
+        super();
     }
 }

@@ -6,7 +6,6 @@ import { RunService } from "@rbxts/services";
 
 @Component({tag:"moving-platform"})
 export class PlatformController extends BaseComponent implements OnStart {
-
     constructor() {
         super();
     }
@@ -70,5 +69,12 @@ export class PlatformController extends BaseComponent implements OnStart {
         this.lastCast = raycastResult!.Instance;
 
         return raycastResult?.Instance === this.instance;
+    }
+}
+
+@Component({tag:"vertical-moving-platform"})
+export class VerticalMovingPlatform extends PlatformController {
+    constructor() {
+        super();
     }
 }
