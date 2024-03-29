@@ -12,7 +12,7 @@ let documents = new Map<string, Document<{ coins: number, games_played: number }
 class _DatastoreService extends BaseComponent implements OnPlayerJoined, OnPlayerLeaving {
     constructor() {
         super();
-        collection = createCollection("PlayerData", {
+        collection = createCollection("data-dev-1", {
             validate: t.strictInterface({ coins: t.integer, games_played: t.integer}),
             defaultData: {
                 coins: 0,

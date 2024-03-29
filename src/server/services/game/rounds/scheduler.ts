@@ -2,12 +2,12 @@ import { Config } from "shared/components/game/config";
 import { RoundManager } from "./round";
 import { BaseComponent } from "@flamework/components";
 import { OnStart, Service } from "@flamework/core";
-import { OnGameEnded, OnPlayerDied } from "shared/components/game/scheduler";
+import { OnGameEnded, OnGameStarted, OnPlayerDied } from "shared/components/game/scheduler";
 import { lookahead } from "server/game/events";
 import { OnPlayerJoinedRound } from "../scheduler";
 
 @Service()
-export class RoundService extends BaseComponent implements OnStart, OnPlayerDied, OnGameEnded, OnPlayerJoinedRound {
+export class RoundService extends BaseComponent implements OnStart, OnPlayerDied, OnGameStarted, OnGameEnded, OnPlayerJoinedRound {
     roundTask?: thread;
     
     onStart() {
@@ -34,6 +34,9 @@ export class RoundService extends BaseComponent implements OnStart, OnPlayerDied
             print("Round task is null");
         }
         this.roundThread();
+    }
+
+    onGameStarted(players: Player[], gameLength: number): void {
     }
 
     onPlayerJoinedRound(player: Player): void {

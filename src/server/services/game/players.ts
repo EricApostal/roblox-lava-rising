@@ -1,21 +1,13 @@
-import { Players } from "@rbxts/services";
-import { UIService } from "../interface/handler";
-import { Controller, OnStart } from "@flamework/core";
+import { Players, PhysicsService } from "@rbxts/services";
+import { OnStart, Service } from "@flamework/core";
 import { BaseComponent } from "@flamework/components";
 import { OnGameEnded, OnGameStarted, OnLocalCharacterLoaded, OnPlayerCharacterLoaded } from "shared/components/game/scheduler";
 
-@Controller()
-export class CharacterController extends BaseComponent implements OnLocalCharacterLoaded, OnStart, OnGameStarted, OnGameEnded {
-    onLocalCharacterLoaded() {
-        // WARNING: This may not call initially on some devices. Proceed with caution.
-        UIService.remount();
-    }
-
+@Service()
+export class CharacterController extends BaseComponent implements OnStart, OnGameStarted, OnGameEnded {
     onStart(): void {
-        // PhysicsService.CollisionGroupSetCollidable("game-players", "game-players", false);
-
-        Players.LocalPlayer.WaitForChild("PlayerGui");
-        UIService.remount();
+        PhysicsService.RegisterCollisionGroup("game-players");
+        PhysicsService.CollisionGroupSetCollidable("game-players", "game-players", false);
     }
 
     onGameStarted(players: Player[], gameLength: number): void {

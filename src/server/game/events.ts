@@ -20,8 +20,8 @@ export function start(players: Player[]) {
 
 // On game end
 export function close(players: Player[]) {
-    Events.endGame.broadcast(players);
     GameSession.endGame(players);
+    Events.endGame.broadcast(players);
 }
 
 // On lookahead

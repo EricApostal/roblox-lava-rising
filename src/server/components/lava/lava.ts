@@ -50,7 +50,6 @@ export class Lava extends BaseComponent implements OnStart, OnLavaRising, OnGame
 
     onLavaRising(): void {
         assert(this.instance.IsA("BasePart"), "Lava component must be attached to a BasePart");
-        print("Lava is rising");
 
         this.instance.Size = this.startSize!;
         this.lavaRisingThread = task.spawn(() => {this.lavaThread()});
