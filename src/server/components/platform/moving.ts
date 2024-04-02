@@ -5,9 +5,7 @@ import { BaseComponent, Component } from "@flamework/components";
 import { OnGameStarted } from "shared/components/game/scheduler";
 import { TweenService } from "@rbxts/services";
 
-const updateThreshhold = 1;
 const timeBetweenMovements = 0;
-const tweenInfo = new TweenInfo(updateThreshhold, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut);
 
 @Component({tag:"moving-platform"})
 export class MovingPlatform extends BaseComponent implements OnStart, OnGameStarted {
@@ -15,6 +13,10 @@ export class MovingPlatform extends BaseComponent implements OnStart, OnGameStar
         assert(this.instance.IsA("BasePart"), "MovingPlatform component must be attached to a BasePart")
         
         const distance = this.instance.GetAttribute("distance") ? (this.instance.GetAttribute("distance") as number): 30;
+        const speed = (this.instance.GetAttribute("speed") ? (this.instance.GetAttribute("speed") as number): 1) / 3;
+        
+        const updateThreshhold = 1 / speed;
+        const tweenInfo = new TweenInfo(updateThreshhold, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut);
 
         const platform = this.instance as BasePart;
         const startPosition = platform.Position;

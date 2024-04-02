@@ -12,10 +12,13 @@ const tweenInfo = new TweenInfo(updateThreshhold, Enum.EasingStyle.Sine, Enum.Ea
 @Component({tag:"lava-raising-platform"})
 export class MovingPlatform extends BaseComponent implements OnStart {
     onStart(): void {
-        assert(this.instance.IsA("BasePart"), "MovingPlatform component must be attached to a BasePart")
+        let primaryPart;
+        if (this.instance.IsA("BasePart")) primaryPart = this.instance;
+        if (this.instance.IsA("Model")) primaryPart = this.instance.PrimaryPart;
+        if (!primaryPart) return;
 
+        const platform = primaryPart;
         const distance = this.instance.GetAttribute("distance") ? (this.instance.GetAttribute("distance") as number): 30;
-        const platform = this.instance as BasePart;
         const startSize = platform.Size;
         const endSize = {"Size": startSize.add(new Vector3(0, distance, 0)), "CFrame": platform.CFrame.add(new Vector3(0, distance/2, 0))};
 
