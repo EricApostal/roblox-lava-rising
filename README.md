@@ -1,16 +1,17 @@
-# Flamework Template
+# Lava Rising
+A **work-in-progress** modern Roblox game written in Typescript. Utilizes [ReactJS](https://react.dev/) for user interfaces.
 
-👋 Hey! This is a pre-configured template you can use for your projects that use [Flamework](https://fireboltofdeath.dev/docs/flamework/).
+![image](https://github.com/EricApostal/roblox-lava-rising/assets/60072374/0b329e1f-c7d6-4a9f-9d56-59d25b67cf0a)
 
-## Usage
+# Full Tech Stack
+[react](https://www.npmjs.com/package/@rbxts/react) - Handles all user interfaces
 
-First, create the folder on your computer where you want your project to be stored.
+[reflex](https://www.npmjs.com/package/@rbxts/react-reflex) - Handles state management for React
 
-Then, open a terminal at that directory and run the following commands:
+[ripple](https://www.npmjs.com/package/@rbxts/ripple) - Animations for React
 
-```console
-npx degit rbxts-flamework/template
-npm i
-```
+[flamework](https://github.com/rbxts-flamework/core) - (Awesome) game framework
 
-That's it! The template has been installed. For further information on how to use Flamework in your project, please see [here](https://fireboltofdeath.dev/docs/flamework).
+# Quick Demo
+https://github.com/EricApostal/roblox-lava-rising/assets/60072374/52254855-9fef-4ecb-87c7-e0f2fede0372
+
